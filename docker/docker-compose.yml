@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../docker/backend.Dockerfile
+    container_name: agriguard-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend/ml/models:/app/ml/models:ro
+      - ../backend/ml/faiss:/app/ml/faiss:ro
+      - ../data:/app/../data:ro
+      - backend-static:/app/static
+    env_file:
+      - ../backend/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/frontend.Dockerfile
+    container_name: agriguard-frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ../frontend/.env.local
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  backend-static:
