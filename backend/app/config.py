@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
     # ── Application ────────────────────────────────────────────────────────
     app_env: Literal["development", "staging", "production"] = "development"
-    app_name: str = "AgriGuard AI"
+    app_name: str = "CropDoctor AI"
     secret_key: str = "changeme"
     allowed_origins: list[str] | str = ["http://localhost:3000", "http://127.0.0.1:3000"]
     log_level: str = "INFO"

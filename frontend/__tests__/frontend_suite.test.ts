@@ -28,19 +28,19 @@ export function runComprehensiveFrontendTests() {
   console.log("Running Phase 6 Comprehensive Frontend Test Suite...");
 
   // 1. Home / Branding & Tagline Verification
-  assert(UI_TRANSLATIONS.en.appTitle === "AgriGuard AI", "English app title correct");
-  assert(UI_TRANSLATIONS.ur.appTitle === "ایگری گارڈ اے آئی", "Urdu app title correct");
-  assert(UI_TRANSLATIONS.sd.appTitle === "ايگري گارڊ اي آءِ", "Sindhi app title correct");
+  assert(UI_TRANSLATIONS.en.appTitle === "CropDoctor AI", "English app title correct");
+  assert(UI_TRANSLATIONS.ur.appTitle === "کراپ ڈاکٹر AI", "Urdu app title correct");
+  assert(UI_TRANSLATIONS.sd.appTitle === "ڪراپ ڊاڪٽر AI", "Sindhi app title correct");
   assert(
-    UI_TRANSLATIONS.en.subtagline.includes("AgriGuard does not only identify crop disease"),
+    UI_TRANSLATIONS.en.subtagline.includes("CropDoctor AI does not only identify"),
     "Core innovation tagline present in English"
   );
   assert(
-    UI_TRANSLATIONS.ur.subtagline.includes("ایگری گارڈ نہ صرف فصلوں کی بیماریوں کی تشخیص کرتا ہے"),
+    UI_TRANSLATIONS.ur.subtagline.includes("کراپ ڈاکٹر AI نہ صرف"),
     "Core innovation tagline present in Urdu"
   );
   assert(
-    UI_TRANSLATIONS.sd.subtagline.includes("ايگري گارڊ نه رڳو فصلن جي بيمارين جي سڃاڻپ ڪري ٿو"),
+    UI_TRANSLATIONS.sd.subtagline.includes("ڪراپ ڊاڪٽر AI نه رڳو"),
     "Core innovation tagline present in Sindhi"
   );
 
@@ -297,7 +297,7 @@ export function runComprehensiveFrontendTests() {
   // 14. Advisor Safety Guardrail: Chemical Dosage Refusal & Escalation
   const safetyRefusalResp: ChatResponse = {
     success: true,
-    answer: "AgriGuard cannot provide specific chemical pesticide dosages. Please consult your local extension office.",
+    answer: "CropDoctor cannot provide specific chemical pesticide dosages. Please consult your local extension office.",
     sources: [],
     language: "en",
     session_id: "sess_safety_123",

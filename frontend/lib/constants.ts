@@ -71,9 +71,9 @@ export const MAX_FILE_SIZE_MB = 10;
 
 export const UI_TRANSLATIONS = {
   en: {
-    appTitle: "AgriGuard AI",
-    tagline: "Know the risk before the damage.",
-    subtagline: "AgriGuard does not only identify crop disease. It explains the diagnosis, measures severity, and forecasts district-level risk.",
+    appTitle: "CropDoctor AI",
+    tagline: "AI-Powered Plant Disease & Pest Identification System for Smart Farming",
+    subtagline: "CropDoctor AI does not only identify plant diseases and pests. It explains the diagnosis with Grad-CAM, measures OpenCV severity, and forecasts district-level risk.",
     scanCrop: "Scan a Crop",
     viewMap: "View Risk Map",
     dashboard: "History / Dashboard",
@@ -113,9 +113,9 @@ export const UI_TRANSLATIONS = {
     scientificDisclaimer: "Disease risk scores are prototype estimations computed from real Open-Meteo weather parameters and the multi-factor risk model.",
   },
   ur: {
-    appTitle: "ایگری گارڈ اے آئی",
-    tagline: "نقصان سے پہلے خطرے کو پہچانیں۔",
-    subtagline: "ایگری گارڈ نہ صرف فصلوں کی بیماریوں کی تشخیص کرتا ہے بلکہ وجہ کی وضاحت، شدت کا تعین اور ضلعی خطرات کی پیش گوئی بھی کرتا ہے۔",
+    appTitle: "کراپ ڈاکٹر AI",
+    tagline: "سمارٹ فارمنگ کے لیے پودوں کی بیماریوں اور کیڑوں کی شناخت کا جدید نظام",
+    subtagline: "کراپ ڈاکٹر AI نہ صرف پودوں کی بیماریوں اور کیڑوں کی تشخیص کرتا ہے بلکہ Grad-CAM سے ثبوت، شدت کا تعین اور ضلعی خطرات کی پیش گوئی بھی کرتا ہے۔",
     scanCrop: "فصل اسکین کریں",
     viewMap: "رسک میپ دیکھیں",
     dashboard: "ہسٹری / ڈیش بورڈ",
@@ -155,9 +155,9 @@ export const UI_TRANSLATIONS = {
     scientificDisclaimer: "بیماری کے خطرے کا اسکور اوپن میٹیو موسم اور ماڈل پر مبنی ابتدائی اشاریہ ہے۔",
   },
   sd: {
-    appTitle: "ايگري گارڊ اي آءِ",
-    tagline: "نقصان کان اڳ خطري کي سڃاڻو.",
-    subtagline: "ايگري گارڊ نه رڳو فصلن جي بيمارين جي سڃاڻپ ڪري ٿو پر ان جي وضاحت، شدت ۽ ضلعي سطح جي خطري جي اڳڪٿي پڻ ڪري ٿو.",
+    appTitle: "ڪراپ ڊاڪٽر AI",
+    tagline: "سمارٽ فارمنگ لاءِ ٻوٽن جي بيمارين ۽ جيتن جي سڃاڻپ جو نظام",
+    subtagline: "ڪراپ ڊاڪٽر AI نه رڳو ٻوٽن جي بيمارين ۽ جيتن جي سڃاڻپ ڪري ٿو پر ان جي وضاحت، شدت ۽ ضلعي سطح جي خطري جي اڳڪٿي پڻ ڪري ٿو.",
     scanCrop: "فصل اسڪين ڪريو",
     viewMap: "رسڪ نقشو ڏسو",
     dashboard: "هسٽري / ڊيش بورڊ",

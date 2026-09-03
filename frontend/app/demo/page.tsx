@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "Hackathon Demo Guide — AgriGuard AI",
-  description: "Comprehensive evaluation guide, 3-minute pitch walkthrough, and known-good test cases for hackathon judges evaluating AgriGuard AI.",
+  title: "Hackathon Demo Guide — CropDoctor AI",
+  description: "Comprehensive evaluation guide, 3-minute pitch walkthrough, and known-good test cases for hackathon judges evaluating CropDoctor AI.",
 };
 
 const DEMO_TEST_CASES = [
@@ -55,7 +55,7 @@ export default function DemoPage() {
           Demo &amp; Judge Presentation
         </h1>
         <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
-          Interactive companion for evaluating the AgriGuard AI live demo, technical architecture, and responsible AI guardrails.
+          Interactive companion for evaluating the CropDoctor AI live demo, technical architecture, and responsible AI guardrails.
         </p>
       </div>
 

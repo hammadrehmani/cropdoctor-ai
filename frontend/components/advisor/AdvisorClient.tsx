@@ -85,7 +85,7 @@ function AdvisorContent() {
     {
       id: "welcome",
       sender: "advisor",
-      text: "Assalam-o-Alaikum! I am your AgriGuard AI Agricultural Advisor. Grounded in verified extension research, I can answer your questions about crop diseases, cultural prevention, and field care.",
+      text: "Assalam-o-Alaikum! I am your CropDoctor AI Agricultural Advisor. Grounded in verified extension research, I can answer your questions about crop diseases, pest identification, cultural prevention, and field care.",
       timestamp: "Just now",
     },
   ]);
@@ -175,10 +175,10 @@ function AdvisorContent() {
         sender: "advisor",
         text:
           language === "ur"
-            ? "السلام علیکم! میں ایگری گارڈ زرعی مشیر ہوں۔ تصدیق شدہ زرعی مواد کی بنیاد پر، میں فصلوں کی بیماریوں اور نگہداشت کے بارے میں آپ کی رہنمائی کے لیے حاضر ہوں۔"
+            ? "السلام علیکم! میں کراپ ڈاکٹر AI زرعی مشیر ہوں۔ تصدیق شدہ زرعی مواد کی بنیاد پر، میں فصلوں کی بیماریوں، کیڑوں کی شناخت اور نگہداشت کے بارے میں آپ کی رہنمائی کے لیے حاضر ہوں۔"
             : language === "sd"
-            ? "اسلام عليڪم! مان ايگري گارڊ زرعي صلاحڪار آهيان. تصديق ٿيل معلومات جي بنياد تي، مان فصلن جي بيمارين بابت اوهان جي رهنمائي لاءِ تيار آهيان."
-            : "Assalam-o-Alaikum! I am your AgriGuard AI Agricultural Advisor. Grounded in verified extension research, I can answer your questions about crop diseases, cultural prevention, and field care.",
+            ? "اسلام عليڪم! مان ڪراپ ڊاڪٽر AI زرعي صلاحڪار آهيان. تصديق ٿيل معلومات جي بنياد تي، مان فصلن جي بيمارين ۽ جيتن بابت اوهان جي رهنمائي لاءِ تيار آهيان."
+            : "Assalam-o-Alaikum! I am your CropDoctor AI Agricultural Advisor. Grounded in verified extension research, I can answer your questions about crop diseases, pest identification, cultural prevention, and field care.",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       },
     ]);
@@ -331,7 +331,7 @@ function AdvisorContent() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <h2 className="text-xs sm:text-sm font-bold text-gray-100 truncate">
-                    {currentTitle || "AgriGuard Advisor"}
+                    {currentTitle || "CropDoctor Advisor"}
                   </h2>
                   <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-[10px] text-emerald-400 font-semibold">
                     Qwen-RAG
@@ -619,7 +619,7 @@ function AdvisorContent() {
                       ? "اپنی فصل، علامات یا بچاؤ کے بارے میں سوال پوچھیں..."
                       : language === "sd"
                       ? "پنهنجي فصل، بيمارين يا سنڀال بابت سوال پڇو..."
-                      : "Ask AgriGuard AI about crop diseases, symptoms, or sprays..."
+                      : "Ask CropDoctor AI about plant diseases, pests, symptoms, or sprays..."
                   }
                   dir={isRtl ? "rtl" : "ltr"}
                   className="flex-1 bg-transparent border-0 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:ring-0 focus:outline-none resize-none max-h-28 px-2 py-1 leading-relaxed"

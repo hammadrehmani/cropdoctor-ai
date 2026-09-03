@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "Technology & Architecture — AgriGuard AI",
-  description: "Deep dive into the machine learning models, computer vision heuristics, RAG architecture, and cloud deployment of AgriGuard AI.",
+  title: "Technology & Architecture — CropDoctor AI",
+  description: "Deep dive into the machine learning models, computer vision heuristics, RAG architecture, and cloud deployment of CropDoctor AI.",
 };
 
 const TECH_COMPONENTS = [
@@ -90,7 +90,7 @@ export default function TechnologyPage() {
           Technology &amp; Architecture
         </h1>
         <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
-          Comprehensive technical overview of the computer vision, OpenCV heuristics, gradient boosting, and retrieval-augmented generation models powering AgriGuard AI.
+          Comprehensive technical overview of the computer vision, OpenCV heuristics, gradient boosting, and retrieval-augmented generation models powering CropDoctor AI.
         </p>
       </div>
 
@@ -133,7 +133,7 @@ export default function TechnologyPage() {
       <div className="glass p-6 rounded-3xl border-gray-800 text-center space-y-3">
         <h2 className="text-lg font-bold text-gray-100">Review the Safety &amp; Governance Charter</h2>
         <p className="text-xs text-gray-400 max-w-md mx-auto">
-          Understand how AgriGuard protects smallholder farmers with chemical dosage refusal and geo-privacy.
+          Understand how CropDoctor protects smallholder farmers with chemical dosage refusal and geo-privacy.
         </p>
         <Link
           href="/safety"

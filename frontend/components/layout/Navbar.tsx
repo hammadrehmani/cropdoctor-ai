@@ -67,11 +67,11 @@ export function Navbar() {
             </div>
             <div className="flex flex-col leading-none">
               <div className="text-base sm:text-lg font-extrabold tracking-tight whitespace-nowrap">
-                <span className="text-emerald-400">AgriGuard</span>
+                <span className="text-emerald-400">CropDoctor</span>
                 <span className="text-gray-300 font-light"> AI</span>
               </div>
               <span className="text-[10px] text-emerald-500/80 font-medium tracking-wide mt-0.5 whitespace-nowrap">
-                Pakistan Crop Intelligence
+                Plant Disease &amp; Pest System
               </span>
             </div>
           </Link>

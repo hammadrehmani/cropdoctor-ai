@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "Responsible AI & Safety — AgriGuard AI",
-  description: "Learn about the strict safety guardrails of AgriGuard AI: zero chemical dosage synthesis, low-confidence expert escalation, and geo-privacy protection.",
+  title: "Responsible AI & Safety — CropDoctor AI",
+  description: "Learn about the strict safety guardrails of CropDoctor AI: zero chemical dosage synthesis, low-confidence expert escalation, and geo-privacy protection.",
 };
 
 const SAFETY_PILLARS = [
@@ -12,13 +12,13 @@ const SAFETY_PILLARS = [
     icon: Icons.ShieldCheck,
     title: "1. Zero Chemical Dosage Generation",
     description:
-      "AgriGuard intentionally and strictly refuses to calculate or synthesize specific chemical pesticide volumes (e.g. ml/acre or grams/liter). Automated dosage recommendations can cause severe crop phytotoxicity, environmental contamination, or pathogen resistance. Chemical inquiries are immediately intercepted and referred to certified agronomists.",
+      "CropDoctor intentionally and strictly refuses to calculate or synthesize specific chemical pesticide volumes (e.g. ml/acre or grams/liter). Automated dosage recommendations can cause severe crop phytotoxicity, environmental contamination, or pathogen resistance. Chemical inquiries are immediately intercepted and referred to certified agronomists.",
   },
   {
     icon: Icons.AlertTriangle,
     title: "2. Uncertainty & Low-Confidence Gating",
     description:
-      "When vision model confidence falls below 60% or when symptom visual features appear ambiguous, AgriGuard labels the diagnosis as 'Uncertain Assessment' with a prominent amber alert and disables automated recommendations, providing direct one-click escalation to human extension officers.",
+      "When vision model confidence falls below 60% or when symptom visual features appear ambiguous, CropDoctor labels the diagnosis as 'Uncertain Assessment' with a prominent amber alert and disables automated recommendations, providing direct one-click escalation to human extension officers.",
   },
   {
     icon: Icons.Lock,
@@ -53,7 +53,7 @@ export default function SafetyPage() {
           Responsible AI &amp; Safety Charter
         </h1>
         <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
-          How AgriGuard AI prioritizes farmer safety, agronomic ethics, transparent explainability, and data privacy over unconstrained automation.
+          How CropDoctor AI prioritizes farmer safety, agronomic ethics, transparent explainability, and data privacy over unconstrained automation.
         </p>
       </div>
 

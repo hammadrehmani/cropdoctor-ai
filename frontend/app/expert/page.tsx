@@ -33,7 +33,7 @@ export default function ExpertPage() {
           Agricultural Expert Consultation
         </h1>
         <p className="text-xs sm:text-sm text-gray-400">
-          When AI confidence is low or complex chemical treatment is needed, AgriGuard connects you directly to verified agricultural extension experts.
+          When AI confidence is low or complex chemical treatment is needed, CropDoctor connects you directly to verified agricultural extension experts.
         </p>
       </div>
 
@@ -141,7 +141,7 @@ export default function ExpertPage() {
           <span>Safety Disclaimer</span>
         </div>
         <p className="leading-relaxed text-[11px]">
-          AgriGuard AI assists with early detection and explainable triage. Always confirm diagnosis with licensed agronomists or local extension field officers prior to procurement or application of regulated agricultural inputs.
+          CropDoctor AI assists with early detection and explainable triage. Always confirm diagnosis with licensed agronomists or local extension field officers prior to procurement or application of regulated agricultural inputs.
         </p>
       </div>
 

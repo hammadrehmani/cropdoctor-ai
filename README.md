@@ -1,8 +1,8 @@
-# 🌾 AgriGuard AI
+# 🌾 CropDoctor AI
 
-**Agricultural disease intelligence platform for Pakistan.**
+**AI-Powered Plant Disease & Pest Identification System for Smart Farming**
 
-Real Computer Vision · Grad-CAM Explainability · Multilingual AI Advisor · Farmer History Dashboard · Open-Meteo 7-Day Risk Forecasting · Strict Privacy-Preserving Geolocation.
+Real-Time Deep Learning Vision · Grad-CAM Visual Explainability · Automated OpenCV Severity Analysis · Multilingual AI Agronomist (English, اردو, سنڌي) · 7-Day Meteorological Outbreak Forecasting · Zero-GPS Farmer Privacy Protection.
 
 ---
 
@@ -38,7 +38,7 @@ Real Computer Vision · Grad-CAM Explainability · Multilingual AI Advisor · Fa
 ### 1. Repository Setup
 
 ```bash
-git clone https://github.com/your-org/agriguard-ai
+git clone https://github.com/hammadrehmani/agriguard-ai
 cd agriguard-ai
 ```
 
@@ -139,4 +139,4 @@ npm run build
 
 ## 📄 License
 
-MIT License — AgriGuard AI Project.
+MIT License — CropDoctor AI Project.

@@ -13,11 +13,11 @@ export function Footer() {
                 <Icons.Leaf className="w-4 h-4 text-emerald-400" />
               </div>
               <span className="text-base font-extrabold text-gray-100">
-                <span className="text-emerald-400">AgriGuard</span> AI
+                <span className="text-emerald-400">CropDoctor</span> AI
               </span>
             </div>
             <p className="text-gray-400 leading-relaxed text-[11px]">
-              Explainable crop disease intelligence, automated severity quantification, and 7-day meteorological outbreak forecasting for Pakistan.
+              AI-Powered Plant Disease &amp; Pest Identification System for Smart Farming: explainable vision triage, automated OpenCV severity quantification, and 7-day meteorological outbreak forecasting.
             </p>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800/60 text-[11px] text-emerald-300 font-semibold">
               <Icons.ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
@@ -129,7 +129,7 @@ export function Footer() {
 
         <div className="border-t border-gray-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-gray-400 text-[11px]">
           <div>
-            &copy; {new Date().getFullYear()} AgriGuard AI. Built for Pakistan Agricultural Resilience.
+            &copy; {new Date().getFullYear()} CropDoctor AI. AI-Powered Plant Disease &amp; Pest Identification System for Smart Farming.
           </div>
           <div className="flex items-center gap-3">
             <span>English</span>

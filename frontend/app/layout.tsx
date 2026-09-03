@@ -8,13 +8,13 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const urdu = Noto_Nastaliq_Urdu({ subsets: ["arabic"], weight: ["400", "700"], variable: "--font-urdu" });
 
 export const metadata: Metadata = {
-  title: "AgriGuard AI — Crop Disease Intelligence for Pakistan",
+  title: "CropDoctor AI — AI-Powered Plant Disease & Pest Identification System for Smart Farming",
   description:
-    "AI-powered crop disease detection, multilingual advisory chat, and district-level risk mapping for Pakistani farmers. Supports cotton, wheat, rice, and sugarcane.",
-  keywords: "crop disease, Pakistan agriculture, AI farming, leaf disease detection, Urdu agricultural advice",
+    "AI-powered plant disease & pest identification, explainable Grad-CAM triage, and 7-day meteorological risk mapping for smart farming in Pakistan.",
+  keywords: "crop disease, pest identification, Pakistan agriculture, smart farming, AI farming, leaf disease detection, CropDoctor AI, Urdu agricultural advice",
   openGraph: {
-    title: "AgriGuard AI",
-    description: "Agricultural disease intelligence platform for Pakistan",
+    title: "CropDoctor AI",
+    description: "AI-Powered Plant Disease & Pest Identification System for Smart Farming",
     type: "website",
   },
 };

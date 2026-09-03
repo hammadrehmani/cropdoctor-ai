@@ -4,8 +4,8 @@ import { CROPS } from "@/lib/constants";
 import { Icons } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "About AgriGuard AI — Crop Disease Intelligence for Pakistan",
-  description: "Learn how AgriGuard AI empowers smallholder farmers and agricultural extension officers across Pakistan with explainable AI and proactive risk modeling.",
+  title: "About CropDoctor AI — AI-Powered Plant Disease & Pest Identification System",
+  description: "Learn how CropDoctor AI empowers smallholder farmers and agricultural extension officers across Pakistan with explainable AI, pest detection, and proactive risk modeling.",
 };
 
 export default function AboutPage() {
@@ -15,13 +15,13 @@ export default function AboutPage() {
       <div className="text-center sm:text-left space-y-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold mb-1">
           <Icons.Globe className="w-3.5 h-3.5" />
-          <span>Agricultural Innovation · Smallholder Decision Support</span>
+          <span>Agricultural Innovation · Smart Farming Decision Support</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-100 tracking-tight">
-          About AgriGuard AI
+          About CropDoctor AI
         </h1>
         <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
-          Empowering Pakistani agriculture with explainable computer vision, automated severity measurement, and micro-climate disease forecasting.
+          AI-Powered Plant Disease &amp; Pest Identification System for Smart Farming: explainable vision triage, automated severity measurement, and meteorological risk forecasting.
         </p>
       </div>
 
@@ -47,11 +47,11 @@ export default function AboutPage() {
           <div className="w-10 h-10 rounded-2xl bg-emerald-950/80 border border-emerald-700/60 flex items-center justify-center text-emerald-400 shrink-0">
             <Icons.Sparkles className="w-5 h-5" />
           </div>
-          <h2 className="text-xl font-bold text-gray-100">The AgriGuard Philosophy</h2>
+          <h2 className="text-xl font-bold text-gray-100">The CropDoctor Philosophy</h2>
         </div>
 
         <div className="p-4 rounded-2xl bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 text-xs sm:text-sm font-semibold leading-relaxed">
-          &ldquo;AgriGuard does not only identify crop disease. It explains the diagnosis, measures severity, and forecasts district-level risk.&rdquo;
+          &ldquo;CropDoctor AI does not only identify plant diseases and pests. It explains the diagnosis with Grad-CAM, measures OpenCV severity, and forecasts district-level risk.&rdquo;
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

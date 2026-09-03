@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Icons } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
-  title: "How It Works — AgriGuard AI",
-  description: "Explore the complete 6-step agricultural intelligence pipeline of AgriGuard AI: from mobile leaf upload to explainable Grad-CAM and district risk forecasting.",
+  title: "How It Works — CropDoctor AI",
+  description: "Explore the complete 6-step plant disease and pest identification pipeline of CropDoctor AI: from mobile leaf upload to explainable Grad-CAM and district risk forecasting.",
 };
 
 const PIPELINE_STEPS = [
@@ -62,7 +62,7 @@ export default function HowItWorksPage() {
           <span>System Architecture · End-to-End Pipeline</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-100 tracking-tight">
-          How AgriGuard AI Works
+          How CropDoctor AI Works
         </h1>
         <p className="text-sm sm:text-base text-gray-400 max-w-2xl leading-relaxed">
           From a single leaf photograph to explainable diagnosis, severity measurement, and proactive epidemiological risk forecasting.

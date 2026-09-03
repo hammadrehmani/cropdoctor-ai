@@ -10,7 +10,7 @@ import { Icons } from "@/components/ui/Icons";
 const TESTIMONIALS = [
   {
     quote:
-      "AgriGuard's scanner detected early yellow rust in my wheat crop before it spread across the whole field. The Grad-CAM heatmap gave me total confidence in the diagnosis.",
+      "CropDoctor's scanner detected early yellow rust in my wheat crop before it spread across the whole field. The Grad-CAM heatmap gave me total confidence in the diagnosis.",
     author: "Muhammad Aslam",
     role: "Wheat Farmer",
     location: "Faisalabad, Punjab",
@@ -44,11 +44,11 @@ const FAQS = [
     questionUr: "اے آئی بیماری کی تشخیص کی وضاحت کیسے کرتا ہے؟",
     questionSd: "اي آءِ بيماري جي تشخيص جي وضاحت ڪيئن ڪندو آهي؟",
     answerEn:
-      "AgriGuard uses Grad-CAM (Gradient-weighted Class Activation Mapping). Instead of giving a mysterious black-box answer, it generates a visual heatmap highlighting the exact leaf lesions and pustules that led to the classification.",
+      "CropDoctor AI uses Grad-CAM (Gradient-weighted Class Activation Mapping). Instead of giving a mysterious black-box answer, it generates a visual heatmap highlighting the exact leaf lesions and pustules that led to the classification.",
     answerUr:
-      "ایگری گارڈ Grad-CAM ٹیکنالوجی کا استعمال کرتا ہے۔ یہ صرف نام نہیں بتاتا بلکہ پتے پر سرخ اور پیلے ہیٹ میپ کے ذریعے واضح کرتا ہے کہ کن دھبوں کی بنیاد پر بیماری کی تشخیص کی گئی ہے۔",
+      "کراپ ڈاکٹر AI جدید Grad-CAM ٹیکنالوجی کا استعمال کرتا ہے۔ یہ صرف نام نہیں بتاتا بلکہ پتے پر سرخ اور پیلے ہیٹ میپ کے ذریعے واضح کرتا ہے کہ کن دھبوں کی بنیاد پر بیماری یا کیڑوں کی تشخیص کی گئی ہے۔",
     answerSd:
-      "ايگري گارڊ Grad-CAM ٽيڪنالاجي استعمال ڪري ٿو. اھو صرف نالو نٿو ٻڌائي پر پن تي ھيٽ ميپ ذريعي ڏيکاري ٿو ته ڪھڙن داغن جي بنياد تي بيماري سڃاتي وئي آھي.",
+      "ڪراپ ڊاڪٽر AI جديد Grad-CAM ٽيڪنالاجي استعمال ڪري ٿو. اھو صرف نالو نٿو ٻڌائي پر پن تي ھيٽ ميپ ذريعي ڏيکاري ٿو ته ڪھڙن داغن جي بنياد تي بيماري سڃاتي وئي آھي.",
   },
   {
     questionEn: "How is the 7-day district outbreak risk calculated?",
@@ -64,18 +64,18 @@ const FAQS = [
   {
     questionEn: "Is my personal farm location tracked or shared?",
     answerEn:
-      "No. AgriGuard enforces strict geo-privacy: GPS coordinates are mapped only to public district centroids with spatial jitter and are never stored on disk or shared on public maps.",
+      "No. CropDoctor AI enforces strict geo-privacy: GPS coordinates are mapped only to public district centroids with spatial jitter and are never stored on disk or shared on public maps.",
     questionUr: "کیا کسان کے فارم کی ذاتی لوکیشن محفوظ کی جاتی ہے؟",
     answerUr:
-      "ہرگز نہیں۔ ایگری گارڈ میں پرائیویسی کو اولین ترجیح حاصل ہے۔ کسان کے جی پی ایس کو صرف ضلعی سطح پر رکھا جاتا ہے اور کبھی بھی ذاتی مقام یا فارم کا ڈیٹا محفوظ نہیں کیا جاتا۔",
+      "ہرگز نہیں۔ کراپ ڈاکٹر AI میں پرائیویسی کو اولین ترجیح حاصل ہے۔ کسان کے جی پی ایس کو صرف ضلعی سطح پر رکھا جاتا ہے اور کبھی بھی ذاتی مقام یا فارم کا ڈیٹا محفوظ نہیں کیا جاتا۔",
     questionSd: "ڇا ھارين جي زمين جي ذاتي لوڪيشن محفوظ ڪئي وڃي ٿي؟",
     answerSd:
-      "بلڪل نه. ايگري گارڊ ۾ پرائيويسي جو پورو خيال رکيو وڃي ٿو. جي پي ايس رڳو ضلعي سينٽر تائين محدود رھندو آھي ۽ ڪڏھن به ذاتي زمين جي ڊيٽا محفوظ نه ڪئي ويندي آھي.",
+      "بلڪل نه. ڪراپ ڊاڪٽر AI ۾ پرائيويسي جو پورو خيال رکيو وڃي ٿو. جي پي ايس رڳو ضلعي سينٽر تائين محدود رھندو آھي ۽ ڪڏھن به ذاتي زمين جي ڊيٽا محفوظ نه ڪئي ويندي آھي.",
   },
   {
     questionEn: "Why does the advisor not prescribe exact chemical pesticide dosages?",
     answerEn:
-      "Automating chemical volume calculations (e.g. ml/acre) can cause severe crop phytotoxicity, groundwater pollution, or chemical resistance. For safety, AgriGuard focuses on cultural management and routes chemical questions to certified human extension officers.",
+      "Automating chemical volume calculations (e.g. ml/acre) can cause severe crop phytotoxicity, groundwater pollution, or chemical resistance. For safety, CropDoctor AI focuses on cultural management and routes chemical questions to certified human extension officers.",
     questionUr: "ایڈوائزر کیمیائی اسپرے کی مقدار کیوں نہیں بتاتا؟",
     answerUr:
       "کیمیائی ادویات کی خودکار مقدار بتانا فصل کو جلانے اور زہریلے اثرات کا سبب بن سکتا ہے۔ کسان کی حفاظت کے لیے ہم قدرتی تدابیر بتاتے ہیں اور کیمیائی مقدار کے لیے مستند زرعی ماہرین سے رابطہ کرواتے ہیں۔",
@@ -326,7 +326,7 @@ export default function HomePage() {
                     <div className="h-3 w-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
                     <div className="h-3 w-3 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-colors" />
                   </div>
-                  <span className="font-mono text-gray-500 pl-2 hidden sm:inline">agriguard-ai-scanner.live</span>
+                  <span className="font-mono text-gray-500 pl-2 hidden sm:inline">cropdoctor-ai-scanner.live</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-1 rounded-lg bg-emerald-950/90 border border-emerald-800/60 text-emerald-300 font-mono text-[11px] font-bold animate-pulse-glow">
@@ -491,7 +491,7 @@ export default function HomePage() {
               <span className="gradient-text">with Farm Triage</span>
             </h2>
             <p className="text-sm text-gray-400 leading-relaxed">
-              AgriGuard AI replaces guesswork with a full diagnostic pipeline designed for smallholders, agronomists, and regional policy makers.
+              CropDoctor AI replaces guesswork with a full plant disease and pest diagnostic pipeline designed for smallholders, agronomists, and regional policy makers.
             </p>
           </div>
 
@@ -609,7 +609,7 @@ export default function HomePage() {
                 icon: <Icons.PhoneCall className="w-6 h-6" />,
                 colorClass: "purple",
                 title: "Certified Expert Escalation",
-                desc: "When cases are uncertain, AgriGuard connects you directly to toll-free extension hotlines and WhatsApp agronomists.",
+                desc: "When cases are uncertain, CropDoctor connects you directly to toll-free extension hotlines and WhatsApp agronomists.",
                 link: "/expert",
                 linkText: "Consult Experts",
               },
@@ -758,7 +758,7 @@ export default function HomePage() {
               <span>Our Story</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-gray-100 tracking-tight">
-              Why We Built <span className="gradient-text">AgriGuard AI</span>
+              Why We Built <span className="gradient-text">CropDoctor AI</span>
             </h2>
             <div className="gradient-border glass p-7 sm:p-9 rounded-3xl space-y-4 text-sm text-gray-300 leading-relaxed shadow-xl text-left">
               <p>
@@ -773,8 +773,8 @@ export default function HomePage() {
               <p>
                 Existing solutions are either expensive commercial software or simplistic black-box classifiers
                 that leave farmers with more questions than answers. We created{" "}
-                <strong className="text-emerald-300">AgriGuard AI</strong> to give Pakistani farmers an
-                explainable, severity-aware, and predictive copilot that speaks their own language and works
+                <strong className="text-emerald-300">CropDoctor AI</strong> to give Pakistani farmers an
+                AI-Powered Plant Disease &amp; Pest Identification System for Smart Farming: explainable, severity-aware, and predictive copilot that speaks their own language and works
                 seamlessly on any mobile phone without login friction.
               </p>
             </div>
@@ -947,10 +947,10 @@ export default function HomePage() {
             </h2>
             <p className="text-sm text-gray-400">
               {lang === "sd"
-                ? "ايگري گارڊ بابت تفصيلي ۽ آسان وضاحتون"
+                ? "ڪراپ ڊاڪٽر بابت تفصيلي ۽ آسان وضاحتون"
                 : lang === "ur"
-                ? "ایگری گارڈ کے بارے میں شفاف اور واضح معلومات"
-                : "Clear, transparent answers about AgriGuard AI."}
+                ? "کراپ ڈاکٹر AI کے بارے میں شفاف اور واضح معلومات"
+                : "Clear, transparent answers about CropDoctor AI."}
             </p>
           </div>
 
