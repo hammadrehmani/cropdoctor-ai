@@ -92,7 +92,7 @@ export default function SafetyPage() {
           </div>
         </div>
         <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-          Whenever complex cases arise, AgriGuard bridges farmers directly with official extension channels and toll-free advisory hotlines (<code className="text-amber-300">0800-15000</code>).
+          Whenever complex cases arise, CropDoctor bridges farmers directly with official extension channels and toll-free advisory hotlines (<code className="text-amber-300">0800-15000</code>).
         </p>
         <div className="pt-2">
           <Link

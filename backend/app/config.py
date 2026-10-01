@@ -1,5 +1,5 @@
 """
-AgriGuard AI — Application Configuration
+CropDoctor Ai — Application Configuration
 =========================================
 Pydantic Settings reads values from environment variables / .env file.
 All settings have sensible defaults for local development.
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # ── Database ───────────────────────────────────────────────────────────
-    database_url: str = "sqlite+aiosqlite:///./agriguard.db"
+    database_url: str = "sqlite+aiosqlite:///./cropdoctor.db"
 
     # ── ML Models ──────────────────────────────────────────────────────────
     model_dir: Path = Path("./ml/models")
@@ -44,8 +44,8 @@ class Settings(BaseSettings):
     classifier_checkpoint: Path = Path("./ml/models/classifier.pt")
     classifier_classes: Path = Path("./ml/models/classifier_classes.json")
 
-    faiss_index_path: Path = Path("./ml/faiss/agriguard.index")
-    faiss_docs_path: Path = Path("./ml/faiss/agriguard_docs.pkl")
+    faiss_index_path: Path = Path("./ml/faiss/cropdoctor.index")
+    faiss_docs_path: Path = Path("./ml/faiss/cropdoctor_docs.pkl")
     embedding_model: str = "paraphrase-multilingual-MiniLM-L12-v2"
     rag_min_similarity: float = 0.35
     rag_top_k: int = 4

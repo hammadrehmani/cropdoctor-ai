@@ -1,5 +1,5 @@
 """
-AgriGuard AI — Phase 5 Database Migration Script
+CropDoctor Ai — Phase 5 Database Migration Script
 ================================================
 Idempotent migration script to add anonymous `device_id` column and index
 to the SQLite `diagnoses` table if it does not already exist.
@@ -26,13 +26,13 @@ def get_db_path() -> Path:
     if len(sys.argv) > 1:
         return Path(sys.argv[1]).resolve()
 
-    # Check env var or default to agriguard.db in current or backend directory
-    db_url = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./agriguard.db")
+    # Check env var or default to cropdoctor.db in current or backend directory
+    db_url = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./cropdoctor.db")
     if db_url.startswith("sqlite"):
         raw_path = db_url.split("///")[-1]
         return Path(raw_path).resolve()
 
-    return Path("agriguard.db").resolve()
+    return Path("cropdoctor.db").resolve()
 
 
 def migrate_database(db_path: Path) -> bool:

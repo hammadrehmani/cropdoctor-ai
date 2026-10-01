@@ -304,7 +304,7 @@ def train_model(config: MLConfig) -> None:
 # ── CLI entry point ───────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train AgriGuard disease classifier")
+    parser = argparse.ArgumentParser(description="Train CropDoctor disease classifier")
     parser.add_argument("--dataset-root", type=Path, default=Path("../data/raw/plant_disease"))
     parser.add_argument("--epochs", type=int, default=20)
     parser.add_argument("--batch-size", type=int, default=16)

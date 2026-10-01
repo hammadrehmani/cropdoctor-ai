@@ -5,7 +5,7 @@ services:
     build:
       context: ../backend
       dockerfile: ../docker/backend.Dockerfile
-    container_name: agriguard-backend
+    container_name: cropdoctor-backend
     ports:
       - "8000:8000"
     volumes:
@@ -26,7 +26,7 @@ services:
     build:
       context: ../frontend
       dockerfile: ../docker/frontend.Dockerfile
-    container_name: agriguard-frontend
+    container_name: cropdoctor-frontend
     ports:
       - "3000:3000"
     env_file:

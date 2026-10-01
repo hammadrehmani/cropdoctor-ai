@@ -226,7 +226,7 @@ def evaluate_checkpoint(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate AgriGuard disease classifier")
+    parser = argparse.ArgumentParser(description="Evaluate CropDoctor disease classifier")
     parser.add_argument("--checkpoint", type=Path, default=Path("ml/models/classifier.pt"))
     parser.add_argument("--dataset-root", type=Path, default=Path("../data/raw/plant_disease"))
     parser.add_argument("--split", choices=["test", "val"], default="test")

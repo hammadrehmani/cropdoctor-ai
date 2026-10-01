@@ -5,7 +5,7 @@
 
 ## Context
 
-AgriGuard AI needs persistent storage for diagnoses, chat sessions, and expert requests. For the hackathon demo, zero-configuration setup is essential. For production on Alibaba Cloud, PostGIS is needed for geospatial queries on district-level data.
+CropDoctor Ai needs persistent storage for diagnoses, chat sessions, and expert requests. For the hackathon demo, zero-configuration setup is essential. For production on Alibaba Cloud, PostGIS is needed for geospatial queries on district-level data.
 
 ## Decision
 

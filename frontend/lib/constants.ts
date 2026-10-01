@@ -1,5 +1,5 @@
 /**
- * AgriGuard AI — App Constants & Multilingual Content
+ * CropDoctor Ai — App Constants & Multilingual Content
  */
 
 import type { CropType, Language } from "./types";

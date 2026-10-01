@@ -2,7 +2,7 @@
 
 ## Overview
 
-Phase 3 builds the complete mobile-first Next.js frontend interface for AgriGuard AI.
+Phase 3 builds the complete mobile-first Next.js frontend interface for CropDoctor Ai.
 
 ---
 

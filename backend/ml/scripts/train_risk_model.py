@@ -1,5 +1,5 @@
 """
-AgriGuard AI — ML Script: Train Predictive Weather Disease Risk Model (XGBoost)
+CropDoctor Ai — ML Script: Train Predictive Weather Disease Risk Model (XGBoost)
 ==============================================================================
 Phase 2 Scientific Improvement
 
@@ -159,7 +159,7 @@ def generate_improved_epidemiological_dataset(n_samples: int = 10000, seed: int 
 
 def train_and_evaluate_model():
     print("=" * 80)
-    print("AGRIGUARD AI — PHASE 2 IMPROVED PREDICTIVE RISK MODEL TRAINING")
+    print("CROPDOCTOR AI — PHASE 2 IMPROVED PREDICTIVE RISK MODEL TRAINING")
     print("=" * 80)
     print("Generating improved multi-factor epidemiological dataset (n=10000, seed=42)...")
     X, y = generate_improved_epidemiological_dataset(n_samples=10000, seed=42)

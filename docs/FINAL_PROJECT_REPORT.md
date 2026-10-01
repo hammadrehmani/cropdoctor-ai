@@ -1,15 +1,15 @@
-# AgriGuard AI — Comprehensive Final Project Report
+# CropDoctor Ai — Comprehensive Final Project Report
 ### Explainable Crop Disease Intelligence & Proactive Risk Forecasting for Pakistan
 
 ---
 
 ## 1. Executive Summary
 
-**AgriGuard AI** is an end-to-end, privacy-preserving agricultural disease intelligence platform engineered specifically for smallholder farmers and agricultural extension officers across Pakistan.
+**CropDoctor Ai** is an end-to-end, privacy-preserving agricultural disease intelligence platform engineered specifically for smallholder farmers and agricultural extension officers across Pakistan.
 
 Agriculture accounts for over **22% of Pakistan's GDP** and employs more than **37% of the national labor force**. Fungal, viral, and bacterial crop epidemics—such as **Wheat Leaf Rust**, **Cotton Leaf Curl Virus (CLCuD)**, and **Rice Blast**—inflict billions of rupees in annual yield losses. Most existing mobile tools merely offer black-box image classification without context, severity measurement, or geographical risk forewarning.
 
-**AgriGuard AI fundamentally changes this paradigm** by delivering:
+**CropDoctor Ai fundamentally changes this paradigm** by delivering:
 1. **Explainable AI (Grad-CAM)**: Proves to the farmer *why* a disease was identified by highlighting visual lesion activations.
 2. **Automated Severity Measurement (OpenCV)**: Quantifies the percentage of affected leaf surface area for objective triage.
 3. **Proactive 7-Day Outbreak Forecasting (XGBoost + Open-Meteo)**: Integrates live micro-climate telemetry to forewarn farmers before epidemics spread.
@@ -21,7 +21,7 @@ Agriculture accounts for over **22% of Pakistan's GDP** and employs more than **
 ## 2. Complete Phase-by-Phase Architecture
 
 ```
-                                  AGRIGUARD AI PIPELINE
+                                  CROPDOCTOR AI PIPELINE
                                   
    +-----------------------------------------------------------------------------------+
    |                                 CLIENT INTERFACE                                  |
@@ -121,7 +121,7 @@ Agriculture accounts for over **22% of Pakistan's GDP** and employs more than **
 
 ## 4. Responsible AI & Safety Highlights
 
-1. **Zero Chemical Dosage Prescription**: AgriGuard strictly refuses to synthesize specific pesticide formulas or volumes, avoiding the risks of crop phytotoxicity, chemical resistance, and groundwater contamination.
+1. **Zero Chemical Dosage Prescription**: CropDoctor strictly refuses to synthesize specific pesticide formulas or volumes, avoiding the risks of crop phytotoxicity, chemical resistance, and groundwater contamination.
 2. **Human-in-the-Loop Safety Gate**: Scans with confidence $<60\%$ or marked `uncertain=True` trigger amber advisory alerts and direct one-click escalation to certified agricultural extension officers.
 3. **Geo-Privacy Centroid Protection**: Farmer private GPS coordinates are never stored on disk or broadcast over public APIs; map markers display only district centroid aggregations.
 4. **Anonymous Device Isolation**: Farmers are protected by client-side UUID persistence without collecting personal identity records or passwords.

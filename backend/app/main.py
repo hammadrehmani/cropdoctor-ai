@@ -1,5 +1,5 @@
 """
-AgriGuard AI — FastAPI Application
+CropDoctor Ai — FastAPI Application
 ====================================
 Entry point. Sets up:
   - CORS

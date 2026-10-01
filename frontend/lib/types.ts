@@ -1,5 +1,5 @@
 /**
- * AgriGuard AI — Shared TypeScript Types
+ * CropDoctor Ai — Shared TypeScript Types
  * Mirrors backend Pydantic schemas for full-stack type safety.
  */
 

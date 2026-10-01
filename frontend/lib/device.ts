@@ -1,10 +1,10 @@
 /**
- * AgriGuard AI — Anonymous Device ID Manager
+ * CropDoctor Ai — Anonymous Device ID Manager
  * Generates and stores a unique anonymous device UUID in localStorage.
  * Ensures farmer diagnosis history is isolated per device without login credentials.
  */
 
-const DEVICE_ID_KEY = "agriguard_device_id";
+const DEVICE_ID_KEY = "cropdoctor_device_id";
 
 export function getAnonymousDeviceId(): string {
   if (typeof window === "undefined") {

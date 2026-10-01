@@ -1,5 +1,5 @@
 """
-AgriGuard AI — Database Engine & Session
+CropDoctor Ai — Database Engine & Session
 =========================================
 Uses SQLAlchemy 2.x async engine.
 Switch DATABASE_URL in .env to move from SQLite → PostgreSQL/PostGIS

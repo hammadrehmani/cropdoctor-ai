@@ -1,16 +1,16 @@
-# 🌾 AgriGuard AI — Complete Team Project Guide
+# 🌾 CropDoctor Ai — Complete Team Project Guide
 ### Simple, Clean & Comprehensive Project Summary for the Entire Team
 
 ---
 
-## 📌 1. What is AgriGuard AI? (The Big Picture)
+## 📌 1. What is CropDoctor Ai? (The Big Picture)
 
 ### The Problem in Pakistan:
 In Pakistan, crop diseases (like **Wheat Rust**, **Cotton Leaf Curl**, and **Rice Blast**) destroy billions of rupees worth of crops every year. Farmers usually don't know the exact disease until it's too late, or they spray the wrong chemical pesticides.
 
 ### Our Solution:
-**AgriGuard AI** is a smart mobile web app built for Pakistani farmers and field officers.
-Instead of just giving a basic disease name, AgriGuard:
+**CropDoctor Ai** is a smart mobile web app built for Pakistani farmers and field officers.
+Instead of just giving a basic disease name, CropDoctor:
 1. 🔬 **Explains the diagnosis** visually using heatmaps (Grad-CAM).
 2. 📊 **Measures the damage severity** (e.g. 15% leaf damage).
 3. 🌦️ **Predicts disease outbreaks 7 days ahead** using local weather data.
@@ -100,10 +100,10 @@ Everything in the codebase is **100% verified and passing**:
 
 ## 💡 7. Quick 3-Minute Demo Script (For Presenters)
 
-When showing AgriGuard to judges, follow this simple sequence:
+When showing CropDoctor to judges, follow this simple sequence:
 
 1. **[0:00 – 0:30] The Hook**:
-   > *"In Pakistan, crop diseases destroy billions in harvest yields. Existing apps are black boxes. AgriGuard explains diagnoses, measures severity, and predicts outbreaks 7 days ahead."*
+   > *"In Pakistan, crop diseases destroy billions in harvest yields. Existing apps are black boxes. CropDoctor explains diagnoses, measures severity, and predicts outbreaks 7 days ahead."*
 2. **[0:30 – 1:30] Scan a Crop**:
    > Open [http://localhost:3000/diagnose](http://localhost:3000/diagnose), upload a Wheat leaf photo, and click Scan.
 3. **[1:30 – 2:00] Show Results**:

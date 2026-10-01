@@ -1,11 +1,11 @@
-# AgriGuard AI — Judge Q&A Technical Reference
+# CropDoctor Ai — Judge Q&A Technical Reference
 
 Honest, precise, and implementation-accurate answers to the 18 key technical and architectural questions.
 
 ---
 
-### 1. What makes AgriGuard different from existing crop diagnosis apps?
-> Most apps are simple black-box classifiers: you upload a photo, and it outputs a single label without explanation, severity context, or geographic epidemiological risk. AgriGuard provides an **end-to-end intelligence pipeline**:
+### 1. What makes CropDoctor different from existing crop diagnosis apps?
+> Most apps are simple black-box classifiers: you upload a photo, and it outputs a single label without explanation, severity context, or geographic epidemiological risk. CropDoctor provides an **end-to-end intelligence pipeline**:
 > 1. **Explainable AI**: Visual Grad-CAM attention heatmaps showing why the neural net made its decision.
 > 2. **Automated Severity Estimation**: OpenCV color/lesion segmentation estimating affected leaf percentage.
 > 3. **Proactive 7-Day Outbreak Risk**: XGBoost model combining Open-Meteo micro-climate data with regional crop vulnerability.
@@ -35,7 +35,7 @@ Honest, precise, and implementation-accurate answers to the 18 key technical and
 ---
 
 ### 6. How is the 7-day district risk score generated?
-> AgriGuard queries the Open-Meteo API for real-time 7-day meteorological forecasts (daily mean/min/max temperature, mean relative humidity, total precipitation, wind speed) for Pakistan district centroids. These environmental vectors are fed into the trained XGBoost model along with crop coefficients to compute a normalized epidemiological risk index ($0.0 \to 1.0$) and identify the primary meteorological driver.
+> CropDoctor queries the Open-Meteo API for real-time 7-day meteorological forecasts (daily mean/min/max temperature, mean relative humidity, total precipitation, wind speed) for Pakistan district centroids. These environmental vectors are fed into the trained XGBoost model along with crop coefficients to compute a normalized epidemiological risk index ($0.0 \to 1.0$) and identify the primary meteorological driver.
 
 ---
 
@@ -62,8 +62,8 @@ Honest, precise, and implementation-accurate answers to the 18 key technical and
 
 ---
 
-### 11. Why does AgriGuard refuse to prescribe pesticide chemical dosages?
-> Providing synthetic chemical volume recommendations (e.g. *"spray 500 ml/acre of chemical X"*) is dangerous and legally restricted. Chemical dosage depends on active ingredient concentration, tank calibration, spray nozzle type, crop growth stage, and soil moisture. Fabricating or automating chemical volumes can cause crop phytotoxicity, groundwater contamination, or chemical resistance. AgriGuard intentionally restricts advice to cultural practices and refers chemical dosage inquiries to certified human extension officers.
+### 11. Why does CropDoctor refuse to prescribe pesticide chemical dosages?
+> Providing synthetic chemical volume recommendations (e.g. *"spray 500 ml/acre of chemical X"*) is dangerous and legally restricted. Chemical dosage depends on active ingredient concentration, tank calibration, spray nozzle type, crop growth stage, and soil moisture. Fabricating or automating chemical volumes can cause crop phytotoxicity, groundwater contamination, or chemical resistance. CropDoctor intentionally restricts advice to cultural practices and refers chemical dosage inquiries to certified human extension officers.
 
 ---
 
@@ -73,7 +73,7 @@ Honest, precise, and implementation-accurate answers to the 18 key technical and
 ---
 
 ### 13. Why anonymous `device_id` persistence instead of user login / JWT?
-> Smallholder farmers in rural areas face friction with email registrations, passwords, OTPs, and authentication flows. AgriGuard generates an anonymous UUID persisted in client `localStorage`. The backend isolates diagnosis history strictly by `device_id`, providing personal scan history without collecting personally identifiable information.
+> Smallholder farmers in rural areas face friction with email registrations, passwords, OTPs, and authentication flows. CropDoctor generates an anonymous UUID persisted in client `localStorage`. The backend isolates diagnosis history strictly by `device_id`, providing personal scan history without collecting personally identifiable information.
 
 ---
 
@@ -99,7 +99,7 @@ Honest, precise, and implementation-accurate answers to the 18 key technical and
 
 ---
 
-### 17. What is the future scope for AgriGuard AI?
+### 17. What is the future scope for CropDoctor Ai?
 > - Expansion to additional Pakistani staple and cash crops (maize, mango, citrus, pulses).
 > - Integration with satellite remote sensing (Sentinel-2 NDVI / moisture index) to complement drone/mobile imagery.
 > - WhatsApp bot interface allowing farmers with 2G/3G connections to send leaf photos directly via chat.

@@ -1,5 +1,5 @@
 /**
- * AgriGuard AI — Advisor Chat History Manager
+ * CropDoctor Ai — Advisor Chat History Manager
  * Persists advisory conversation sessions per device in localStorage.
  */
 
@@ -26,7 +26,7 @@ export interface StoredChatSession {
   updatedAt: string;
 }
 
-const HISTORY_STORAGE_KEY = "agriguard_advisor_history_v1";
+const HISTORY_STORAGE_KEY = "cropdoctor_advisor_history_v1";
 
 export function getStoredChatSessions(): StoredChatSession[] {
   if (typeof window === "undefined") return [];

@@ -1,4 +1,4 @@
-# AgriGuard AI — Deployment & Production Operations Guide
+# CropDoctor Ai — Deployment & Production Operations Guide
 
 ## Executive Deployment Status
 
@@ -41,7 +41,7 @@
    - Frontend Next.js running on Container Service / ECS instance (`ecs.c7.large`).
    - Backend FastAPI running with Uvicorn ASGI workers on GPU/CPU optimized instance (`ecs.gn7i-vinstance.2xlarge` or `ecs.g7.xlarge`).
 2. **Object Storage (OSS)**:
-   - Grad-CAM visual heatmaps and uploaded leaf imagery persisted to Alibaba Cloud OSS bucket (`agriguard-assets`).
+   - Grad-CAM visual heatmaps and uploaded leaf imagery persisted to Alibaba Cloud OSS bucket (`cropdoctor-assets`).
 3. **Database (ApsaraDB RDS for PostgreSQL)**:
    - Scalable relational database with PostGIS extensions for district-level risk mapping and anonymous device isolation.
 4. **AI / Model Inference (Model Studio & DashScope)**:
@@ -51,7 +51,7 @@
 
 ## 2. Local Production Readiness & Verification
 
-AgriGuard AI is fully verified for local production execution.
+CropDoctor Ai is fully verified for local production execution.
 
 ### Prerequisites:
 - Python 3.10+ (tested with Python 3.11 / 3.14)
@@ -85,7 +85,7 @@ npm run start
 ```bash
 # Service Health
 curl http://localhost:8000/health
-# Response: {"status":"ok","service":"AgriGuard AI","environment":"production",...}
+# Response: {"status":"ok","service":"CropDoctor Ai","environment":"production",...}
 
 # Service Readiness (DB + Models + RAG)
 curl http://localhost:8000/ready
@@ -118,7 +118,7 @@ Once Alibaba Cloud credits/access are provided by the hackathon organizers, exec
 3. Launch an ECS Ubuntu 22.04 LTS instance.
 
 ### Step 2: Configure Alibaba Cloud OSS (Object Storage)
-1. In the OSS Console, create a private bucket named `agriguard-assets-prod`.
+1. In the OSS Console, create a private bucket named `cropdoctor-assets-prod`.
 2. Configure bucket lifecycle rules: auto-expire temporary Grad-CAM images after 30 days.
 3. Attach RAM Role `AliyunOSSRole` to the ECS instance for credential-less IAM authorization.
 
@@ -135,8 +135,8 @@ Once Alibaba Cloud credits/access are provided by the hackathon organizers, exec
 ### Step 4: Deploy Containerized Application
 1. Clone the repository on the ECS instance:
    ```bash
-   git clone https://github.com/organization/agriguard-ai.git
-   cd agriguard-ai/docker
+   git clone https://github.com/organization/cropdoctor-ai.git
+   cd cropdoctor-ai/docker
    ```
 2. Set production environment variables in `backend/.env` and `frontend/.env.local`.
 3. Launch production stack with Nginx SSL reverse proxy:
@@ -147,8 +147,8 @@ Once Alibaba Cloud credits/access are provided by the hackathon organizers, exec
 ### Step 5: Post-Deployment Smoke Test
 Run the automated smoke test script:
 ```bash
-curl -f https://api.agriguard.ai/ready
-curl -f https://agriguard.ai/
+curl -f https://api.cropdoctor.ai/ready
+curl -f https://cropdoctor.ai/
 ```
 
 ---

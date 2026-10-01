@@ -1,5 +1,5 @@
 /**
- * AgriGuard AI — Typed API Client
+ * CropDoctor Ai — Typed API Client
  * All backend calls go through here. Centralises base URL + error handling.
  */
 
@@ -89,7 +89,7 @@ export async function analyzeCrop(
     const msg = err instanceof Error ? err.message : "Network connection failed";
     throw new ApiError(
       0,
-      `Unable to connect to AgriGuard server (${msg}). Please check your internet connection.`
+      `Unable to connect to CropDoctor server (${msg}). Please check your internet connection.`
     );
   }
 

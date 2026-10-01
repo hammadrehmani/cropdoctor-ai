@@ -1,4 +1,4 @@
-# AgriGuard AI — Phase 2 ML Pipeline Guide
+# CropDoctor Ai — Phase 2 ML Pipeline Guide
 
 > **Backend-only document.** Frontend image upload UI is built in Phase 3.
 
@@ -27,7 +27,7 @@ PlantVillage is a publicly available benchmark dataset. You can obtain it from:
 - **PaddlePaddle mirror**: Available via PaddleClas examples
 
 > [!IMPORTANT]
-> AgriGuard AI does NOT ship training images. You must download the dataset
+> CropDoctor Ai does NOT ship training images. You must download the dataset
 > and place it yourself under `data/raw/`.
 
 ### Dataset directory structure
