@@ -8,31 +8,23 @@ import { Icons } from "@/components/ui/Icons";
 interface NavItem {
   href: string;
   label: string;
-  labelUr: string;
-  icon: (props: { className?: string }) => React.JSX.Element;
+  icon?: (props: { className?: string; style?: React.CSSProperties }) => React.JSX.Element;
+  badge?: string;
 }
 
 const PRIMARY_LINKS: NavItem[] = [
-  { href: "/",             label: "Home",         labelUr: "ہوم",         icon: Icons.Home },
-  { href: "/#services",    label: "Services",     labelUr: "خدمات",       icon: Icons.Layers },
-  { href: "/#how-it-works",label: "How It Works", labelUr: "طریقہ کار",   icon: Icons.Zap },
-  { href: "/risk-map",     label: "Risk Map",     labelUr: "رسک میپ",     icon: Icons.Map },
-  { href: "/advisor",      label: "AI Advisor",   labelUr: "زرعی مشیر",   icon: Icons.Message },
-  { href: "/dashboard",    label: "Dashboard",    labelUr: "ڈیش بورڈ",    icon: Icons.Dashboard },
+  { href: "/",             label: "Home",         icon: Icons.Home },
+  { href: "/diagnose",     label: "Disease Prediction", icon: Icons.Scan, badge: "POPULAR" },
+  { href: "/advisor",      label: "AI Advisor",   icon: Icons.Message, badge: "AI" },
 ];
 
 const MORE_LINKS: NavItem[] = [
-  { href: "/#what-we-do",      label: "What We Do",      labelUr: "ہمارا کام",     icon: Icons.Sparkles },
-  { href: "/crops",           label: "Supported Crops", labelUr: "فصلیں",         icon: Icons.Leaf },
-  { href: "/#our-story",       label: "Our Story",       labelUr: "ہماری کہانی",   icon: Icons.BookOpen },
-  { href: "/#our-mission",     label: "Our Mission",     labelUr: "ہمارا مقصد",    icon: Icons.Target },
-  { href: "/#trusted-advisor", label: "Trusted Sources", labelUr: "مستند ذرائع",   icon: Icons.ShieldCheck },
-  { href: "/#faq",             label: "FAQ",             labelUr: "عام سوالات",    icon: Icons.HelpCircle },
-];
-
-const ALL_MOBILE_LINKS: NavItem[] = [
-  ...PRIMARY_LINKS,
-  ...MORE_LINKS,
+  { href: "/#what-we-do",      label: "What We Do",      icon: Icons.Sparkles },
+  { href: "/risk-map",         label: "Risk Map",        icon: Icons.Map },
+  { href: "/dashboard",        label: "Dashboard",       icon: Icons.Dashboard },
+  { href: "/crops",            label: "Supported Crops", icon: Icons.Leaf },
+  { href: "/#our-story",       label: "About",           icon: Icons.BookOpen },
+  { href: "/#faq",             label: "FAQ",             icon: Icons.HelpCircle },
 ];
 
 export function Navbar() {
@@ -40,8 +32,14 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Close dropdown on outside click
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -53,70 +51,101 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-gray-950/80 backdrop-blur-2xl shadow-xl shadow-black/30">
+    <header
+      className="sticky top-0 z-50 transition-all duration-300"
+      style={{
+        background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.95)",
+        backdropFilter: "blur(20px) saturate(180%)",
+        WebkitBackdropFilter: "blur(20px) saturate(180%)",
+        borderBottom: "1px solid rgba(0,0,0,0.07)",
+        boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.08)" : "none",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          
-          {/* Brand Logo - Fixed single line */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-xl p-1 shrink-0 whitespace-nowrap"
-          >
-            <div className="w-9 h-9 rounded-xl bg-emerald-950/90 border border-emerald-700/60 flex items-center justify-center text-emerald-400 group-hover:border-emerald-500 transition-colors shadow-inner shrink-0">
-              <Icons.Leaf className="w-5 h-5 text-emerald-400" />
+
+          {/* Brand Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group focus:outline-none shrink-0">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "#1a3626" }}
+            >
+              <Icons.Leaf className="w-5 h-5 text-white" />
             </div>
             <div className="flex flex-col leading-none">
-              <div className="text-base sm:text-lg font-extrabold tracking-tight whitespace-nowrap">
-                <span className="text-emerald-400">CropDoctor</span>
-                <span className="text-gray-300 font-light"> AI</span>
+              <div className="text-base font-extrabold tracking-tight text-gray-900 whitespace-nowrap">
+                CropDoctor
               </div>
-              <span className="text-[10px] text-emerald-500/80 font-medium tracking-wide mt-0.5 whitespace-nowrap">
-                Plant Disease &amp; Pest System
+              <span className="text-[10px] font-medium whitespace-nowrap" style={{ color: "#4a9a6b" }}>
+                Smart Farming Made Simple
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav Links - Single line guaranteed */}
-          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-1 shrink-0">
+          {/* Desktop Navigation — Pill-style like Croplyx */}
+          <nav aria-label="Main Navigation" className="hidden lg:flex items-center gap-1">
             {PRIMARY_LINKS.map((link) => {
-              const isActive = pathname === link.href || (link.href === "/" && pathname === "/");
+              const isActive = pathname === link.href;
               const IconComp = link.icon;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-150 ${
-                    isActive && !link.href.includes("#")
-                      ? "bg-emerald-950/90 text-emerald-300 border border-emerald-700/60 shadow-sm"
-                      : "text-gray-300 hover:text-emerald-300 hover:bg-gray-900/80"
-                  }`}
+                  className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-150"
+                  style={{
+                    background: isActive ? "#F0EDE5" : "transparent",
+                    color: isActive ? "#1a3626" : "#374151",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.background = "#F8F6F0";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) (e.currentTarget as HTMLElement).style.background = "transparent";
+                  }}
                 >
-                  <IconComp className="w-3.5 h-3.5 opacity-80 shrink-0" />
+                  {IconComp && <IconComp className="w-4 h-4 opacity-70 shrink-0" />}
                   <span>{link.label}</span>
+                  {link.badge && (
+                    <span
+                      className="text-[9px] font-black px-1.5 py-0.5 rounded-full"
+                      style={{
+                        background: link.badge === "AI" ? "#1a3626" : "#FEF3C7",
+                        color: link.badge === "AI" ? "#fff" : "#92400E",
+                      }}
+                    >
+                      {link.badge}
+                    </span>
+                  )}
                 </Link>
               );
             })}
 
-            {/* "More" Dropdown Menu for Secondary Sections */}
+            {/* More Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 type="button"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer ${
-                  dropdownOpen
-                    ? "bg-gray-900 text-emerald-300 border border-gray-700"
-                    : "text-gray-300 hover:text-emerald-300 hover:bg-gray-900/80"
-                }`}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer"
+                style={{ color: "#374151" }}
                 aria-expanded={dropdownOpen}
               >
-                <span>About &amp; More</span>
-                <span className="text-[10px] transition-transform duration-200">
-                  {dropdownOpen ? "▲" : "▼"}
-                </span>
+                <span>About</span>
+                <Icons.ChevronDown
+                  className="w-4 h-4 transition-transform duration-200"
+                  style={{ transform: dropdownOpen ? "rotate(180deg)" : "rotate(0deg)", opacity: 0.6 }}
+                />
               </button>
 
               {dropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-gray-800 bg-gray-950/95 backdrop-blur-2xl p-2 shadow-2xl shadow-black/80 space-y-1 z-50 animate-fade-in-up">
+                <div
+                  className="absolute left-0 mt-2 w-52 rounded-2xl p-1.5 space-y-0.5 z-50 animate-fade-in-up"
+                  style={{
+                    background: "rgba(255,255,255,0.98)",
+                    border: "1px solid rgba(0,0,0,0.08)",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06)",
+                    backdropFilter: "blur(20px)",
+                  }}
+                >
                   {MORE_LINKS.map((item) => {
                     const ItemIcon = item.icon;
                     return (
@@ -124,13 +153,13 @@ export function Navbar() {
                         key={item.href}
                         href={item.href}
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-gray-300 hover:text-emerald-300 hover:bg-gray-900 transition-colors whitespace-nowrap"
+                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors whitespace-nowrap"
+                        style={{ background: "transparent" }}
+                        onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.background = "#F0EDE5"}
+                        onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.background = "transparent"}
                       >
-                        <div className="flex items-center gap-2">
-                          <ItemIcon className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                          <span>{item.label}</span>
-                        </div>
-                        <span className="text-[11px] text-gray-500 font-serif" dir="rtl">{item.labelUr}</span>
+                        {ItemIcon && <ItemIcon className="w-4 h-4 shrink-0" style={{ color: "#4a9a6b" }} />}
+                        <span>{item.label}</span>
                       </Link>
                     );
                   })}
@@ -139,25 +168,31 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* Right Action Area - Clean single line */}
-          <div className="hidden md:flex items-center gap-3 shrink-0 whitespace-nowrap">
-            <div className="hidden xl:flex items-center gap-1.5 text-[11px] text-gray-400 bg-gray-900/90 border border-gray-800 px-2.5 py-1 rounded-full whitespace-nowrap">
-              <Icons.Globe className="w-3 h-3 text-emerald-400 shrink-0" />
-              <span className="font-medium">EN · اردو · سنڌي</span>
-            </div>
+          {/* Right — Contact + CTA */}
+          <div className="hidden md:flex items-center gap-3 shrink-0">
+            <span
+              className="text-sm font-medium text-gray-500 hidden xl:block cursor-default"
+              style={{ color: "#6B7280" }}
+            >
+              Contact
+            </span>
             <Link
               href="/diagnose"
-              className="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-lg shadow-emerald-950/80 glow-emerald whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all"
+              style={{ background: "#1a3626", color: "#ffffff" }}
+              onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.background = "#243b2f"}
+              onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.background = "#1a3626"}
             >
-              <Icons.Camera className="w-3.5 h-3.5 shrink-0" />
-              <span>Scan Leaf</span>
+              <Icons.Camera className="w-4 h-4 shrink-0" />
+              Try Free Demo
             </Link>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Hamburger */}
           <button
             type="button"
-            className="lg:hidden p-2.5 rounded-xl text-gray-400 hover:text-gray-100 hover:bg-gray-900 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer shrink-0"
+            className="lg:hidden p-2 rounded-xl cursor-pointer shrink-0"
+            style={{ background: "#F0EDE5", color: "#1a3626" }}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle Navigation Menu"
             aria-expanded={mobileOpen}
@@ -167,49 +202,41 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Menu */}
       {mobileOpen && (
         <nav
           aria-label="Mobile Navigation"
-          className="lg:hidden border-t border-gray-800/80 bg-gray-950/98 backdrop-blur-3xl px-4 py-3 space-y-1.5 animate-fade-in-up"
+          className="lg:hidden px-4 py-4 space-y-1 animate-fade-in-up"
+          style={{ background: "rgba(255,255,255,0.98)", borderTop: "1px solid rgba(0,0,0,0.06)" }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            {ALL_MOBILE_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-              const IconComp = link.icon;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-colors whitespace-nowrap ${
-                    isActive && !link.href.includes("#")
-                      ? "bg-emerald-950/80 text-emerald-300 border border-emerald-800/60"
-                      : "text-gray-300 hover:text-gray-100 hover:bg-gray-900"
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <IconComp className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>{link.label}</span>
-                  </div>
-                  <span className="text-xs text-gray-500 font-serif" dir="rtl">{link.labelUr}</span>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="pt-3 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400 px-1">
-            <div className="flex items-center gap-1.5">
-              <Icons.ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>100% Anonymous</span>
-            </div>
+          {[...PRIMARY_LINKS, ...MORE_LINKS].map((link) => {
+            const isActive = pathname === link.href;
+            const IconComp = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors"
+                style={{
+                  background: isActive ? "#F0EDE5" : "transparent",
+                  color: isActive ? "#1a3626" : "#374151",
+                }}
+              >
+                {IconComp && <IconComp className="w-4 h-4 shrink-0" style={{ color: "#4a9a6b" }} />}
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
+          <div className="pt-3 border-t" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
             <Link
               href="/diagnose"
               onClick={() => setMobileOpen(false)}
-              className="inline-flex items-center gap-1 text-emerald-400 font-bold bg-emerald-950/80 border border-emerald-800 px-3 py-1 rounded-lg whitespace-nowrap"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white"
+              style={{ background: "#1a3626" }}
             >
-              <Icons.Camera className="w-3.5 h-3.5" />
-              <span>Scan Leaf</span>
+              <Icons.Camera className="w-4 h-4" />
+              Try Free Demo
             </Link>
           </div>
         </nav>

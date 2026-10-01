@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // @ts-expect-error allowedDevOrigins is supported in Next.js 15+
   allowedDevOrigins: ["*.lhr.life", "*.loca.lt", "localhost:3000"],
   async rewrites() {
     const backendUrl = process.env.BACKEND_INTERNAL_URL || "http://127.0.0.1:8000";

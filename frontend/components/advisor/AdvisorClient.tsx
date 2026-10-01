@@ -292,9 +292,12 @@ function AdvisorContent() {
   const isRtl = language === "ur" || language === "sd";
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6">
-      {/* Outer ChatGPT/Gemini Shell */}
-      <div className="relative flex h-[calc(100vh-6rem)] min-h-[580px] max-h-[920px] rounded-3xl border border-gray-800/90 bg-gray-950/70 backdrop-blur-2xl overflow-hidden shadow-2xl">
+    <div className="w-full max-w-7xl mx-auto px-2 sm:px-4 py-3 sm:py-6" style={{ minHeight: "calc(100vh - 4rem)" }}>
+      {/* Outer Chat Shell — Croplyx white card */}
+      <div
+        className="relative flex h-[calc(100vh-6rem)] min-h-[580px] max-h-[920px] rounded-3xl overflow-hidden shadow-2xl"
+        style={{ border: "1px solid #E5E1D8", background: "#ffffff" }}
+      >
         {/* Left History Sidebar (ChatGPT / Gemini Style) */}
         <AdvisorSidebar
           isOpen={isSidebarOpen}
@@ -311,17 +314,21 @@ function AdvisorContent() {
 
         {/* Main Chat Panel */}
         <div
-          className="flex-1 flex flex-col min-w-0 bg-gray-950/40 relative overflow-hidden"
+          className="flex-1 flex flex-col min-w-0 relative overflow-hidden"
+          style={{ background: "#FAFAF8" }}
           dir={isRtl ? "rtl" : "ltr"}
         >
-          {/* Top Bar (ChatGPT & Gemini Style) */}
-          <div className="flex items-center justify-between gap-2 px-3.5 sm:px-6 py-3 border-b border-gray-800/80 bg-gray-950/60 shrink-0">
-            {/* Left: Sidebar Toggle & Active Title */}
+          {/* Top Bar */}
+          <div
+            className="flex items-center justify-between gap-2 px-3.5 sm:px-6 py-3 shrink-0"
+            style={{ borderBottom: "1px solid #E5E1D8", background: "#ffffff" }}
+          >
             <div className="flex items-center gap-2.5 min-w-0">
               <button
                 type="button"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="p-2 rounded-xl bg-gray-900/90 hover:bg-gray-800 border border-gray-800 text-gray-300 hover:text-white transition-colors cursor-pointer shrink-0"
+                className="p-2 rounded-xl transition-colors cursor-pointer shrink-0"
+                style={{ background: "#F0EDE5", border: "1px solid #E5E1D8", color: "#1a3626" }}
                 title={isSidebarOpen ? "Collapse sidebar" : "Expand chat history"}
                 aria-label="Toggle sidebar"
               >
@@ -330,10 +337,13 @@ function AdvisorContent() {
 
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-xs sm:text-sm font-bold text-gray-100 truncate">
+                  <h2 className="text-xs sm:text-sm font-bold text-gray-800 truncate">
                     {currentTitle || "CropDoctor Advisor"}
                   </h2>
-                  <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-[10px] text-emerald-400 font-semibold">
+                  <span
+                    className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold"
+                    style={{ background: "#E8F5EE", color: "#16A34A", border: "1px solid #BBF7D0" }}
+                  >
                     Qwen-RAG
                   </span>
                 </div>
@@ -343,7 +353,10 @@ function AdvisorContent() {
             {/* Right: Crop Filter, Language Selector & Quick New Chat */}
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               {/* Language Switcher */}
-              <div className="flex bg-gray-900 border border-gray-800 p-0.5 rounded-xl text-xs">
+              <div
+                className="flex p-0.5 rounded-xl text-xs"
+                style={{ background: "#F0EDE5", border: "1px solid #E5E1D8" }}
+              >
                 {LANGUAGES.map((lang) => (
                   <button
                     key={lang.value}
@@ -353,9 +366,12 @@ function AdvisorContent() {
                     }}
                     className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-semibold transition-all cursor-pointer ${
                       language === lang.value
-                        ? "bg-emerald-600 text-white shadow-sm"
-                        : "text-gray-400 hover:text-gray-200"
+                        ? "shadow-sm text-white"
+                        : "text-gray-600 hover:text-gray-900"
                     }`}
+                    style={{
+                      background: language === lang.value ? "#1a3626" : "transparent",
+                    }}
                   >
                     {lang.nativeLabel}
                   </button>
@@ -366,18 +382,26 @@ function AdvisorContent() {
               <button
                 type="button"
                 onClick={handleResetSession}
-                className="hidden sm:flex items-center gap-1.5 p-2 px-3 rounded-xl bg-gray-900 hover:bg-gray-800 border border-gray-800 text-gray-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
+                className="hidden sm:flex items-center gap-1.5 p-2 px-3 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                style={{
+                  background: "#F0EDE5",
+                  border: "1px solid #E5E1D8",
+                  color: "#1a3626",
+                }}
                 title="Start new conversation"
               >
-                <Icons.Plus className="w-3.5 h-3.5 text-emerald-400" />
+                <Icons.Plus className="w-3.5 h-3.5" style={{ color: "#16A34A" }} />
                 <span>New</span>
               </button>
             </div>
           </div>
 
           {/* Crop Filter Selector Pills */}
-          <div className="flex items-center gap-1.5 px-4 sm:px-6 py-2 overflow-x-auto no-scrollbar shrink-0 border-b border-gray-800/40 bg-gray-900/20">
-            <span className="text-[11px] text-gray-500 font-medium mr-1 shrink-0">
+          <div
+            className="flex items-center gap-1.5 px-4 sm:px-6 py-2 overflow-x-auto no-scrollbar shrink-0"
+            style={{ borderBottom: "1px solid #E5E1D8", background: "#F8F6F0" }}
+          >
+            <span className="text-[11px] text-gray-500 font-semibold mr-1 shrink-0">
               {language === "ur" ? "فصل منتخب کریں:" : language === "sd" ? "فصل چونڊيو:" : "Crop Focus:"}
             </span>
             <button
@@ -385,11 +409,12 @@ function AdvisorContent() {
                 setSelectedCrop("all");
                 persistSession(messages, "all");
               }}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all shrink-0 cursor-pointer ${
-                selectedCrop === "all"
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "bg-gray-900/80 border border-gray-800 text-gray-400 hover:text-gray-200"
-              }`}
+              className="px-3 py-1 rounded-full text-[11px] font-semibold transition-all shrink-0 cursor-pointer"
+              style={{
+                background: selectedCrop === "all" ? "#1a3626" : "#F0EDE5",
+                color: selectedCrop === "all" ? "#fff" : "#374151",
+                border: selectedCrop === "all" ? "none" : "1px solid #E5E1D8",
+              }}
             >
               All Crops
             </button>
@@ -400,11 +425,12 @@ function AdvisorContent() {
                   setSelectedCrop(c.value);
                   persistSession(messages, c.value);
                 }}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1 cursor-pointer ${
-                  selectedCrop === c.value
-                    ? "bg-emerald-600 text-white shadow-sm"
-                    : "bg-gray-900/80 border border-gray-800 text-gray-400 hover:text-gray-200"
-                }`}
+                className="px-3 py-1 rounded-full text-[11px] font-semibold transition-all shrink-0 flex items-center gap-1 cursor-pointer"
+                style={{
+                  background: selectedCrop === c.value ? "#1a3626" : "#F0EDE5",
+                  color: selectedCrop === c.value ? "#fff" : "#374151",
+                  border: selectedCrop === c.value ? "none" : "1px solid #E5E1D8",
+                }}
               >
                 <span>{c.emoji}</span>
                 <span>{c.label}</span>
@@ -414,15 +440,18 @@ function AdvisorContent() {
 
           {/* Scan Context Card (if coming from crop diagnose) */}
           {diagnosisContext && showContextCard && (
-            <div className="mx-4 sm:mx-6 mt-3 p-3 rounded-2xl bg-emerald-950/40 border border-emerald-800/60 text-xs text-emerald-200 flex items-center justify-between gap-3 shrink-0 animate-fade-in-up">
+            <div
+              className="mx-4 sm:mx-6 mt-3 p-3 rounded-2xl text-xs flex items-center justify-between gap-3 shrink-0 animate-fade-in-up"
+              style={{ background: "#E8F5EE", border: "1px solid #BBF7D0" }}
+            >
               <div className="flex items-center gap-2.5">
-                <Icons.Leaf className="w-5 h-5 text-emerald-400 shrink-0" />
+                <Icons.Leaf className="w-5 h-5 shrink-0" style={{ color: "#16A34A" }} />
                 <div>
-                  <div className="font-bold text-emerald-300">
+                  <div className="font-bold" style={{ color: "#15803d" }}>
                     Active Scan Context: {diagnosisContext.disease || "Crop Scan"}
                     {diagnosisContext.crop && ` (${diagnosisContext.crop})`}
                   </div>
-                  <div className="text-[11px] text-emerald-400/80">
+                  <div className="text-[11px]" style={{ color: "#4a9a6b" }}>
                     {diagnosisContext.confidence !== undefined &&
                       `Confidence: ${(diagnosisContext.confidence * 100).toFixed(1)}%`}
                     {diagnosisContext.severity_tier &&
@@ -442,13 +471,14 @@ function AdvisorContent() {
                     )
                   }
                   disabled={isLoading}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-2.5 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer disabled:opacity-50"
+                  className="text-white font-semibold px-2.5 py-1.5 rounded-lg text-[11px] transition-all cursor-pointer disabled:opacity-50"
+                  style={{ background: "#1a3626" }}
                 >
                   Ask About Scan
                 </button>
                 <button
                   onClick={() => setShowContextCard(false)}
-                  className="text-gray-400 hover:text-gray-200 p-1 text-sm cursor-pointer"
+                  className="text-gray-400 hover:text-gray-600 p-1 text-sm cursor-pointer"
                   title="Dismiss context"
                 >
                   ✕
@@ -471,22 +501,35 @@ function AdvisorContent() {
                     className={`flex items-start gap-3 ${isUser ? "justify-end" : "justify-start"}`}
                   >
                     {!isUser && (
-                      <div className="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-emerald-400 shrink-0 shadow-md">
-                        <Icons.Sparkles className="w-4 h-4" />
+                      <div
+                        className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-md"
+                        style={{ background: "#E8F5EE", border: "1px solid #BBF7D0" }}
+                      >
+                        <Icons.Sparkles className="w-4 h-4" style={{ color: "#16A34A" }} />
                       </div>
                     )}
 
                     <div
-                      className={`max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 space-y-2 shadow-md text-sm ${
-                        isUser
-                          ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-tr-none font-medium shadow-emerald-950/40"
-                          : "bg-gray-900/90 border border-gray-800 text-gray-200 rounded-tl-none backdrop-blur-md"
+                      className={`max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 space-y-2 shadow-sm text-sm ${
+                        isUser ? "rounded-tr-none" : "rounded-tl-none"
                       }`}
+                      style={{
+                        background: isUser ? "#1a3626" : "#ffffff",
+                        color: isUser ? "#ffffff" : "#374151",
+                        border: isUser ? "none" : "1px solid #E5E1D8",
+                      }}
                       dir={isRtl && !isUser ? "rtl" : "ltr"}
                     >
                       {!isUser && msg.escalate && (
-                        <div className="p-2.5 rounded-xl bg-amber-950/70 border border-amber-800/80 text-amber-200 text-xs flex items-center gap-2">
-                          <Icons.AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                        <div
+                          className="p-2.5 rounded-xl text-xs flex items-center gap-2"
+                          style={{
+                            background: "#FFFBEB",
+                            border: "1px solid #FCD34D",
+                            color: "#92400E",
+                          }}
+                        >
+                          <Icons.AlertTriangle className="w-4 h-4 shrink-0 text-amber-600" />
                           <div className="leading-tight">
                             <span className="font-bold">Expert Referral Recommended: </span>
                             <span>Please consult your local extension officer for chemical prescription.</span>
@@ -501,9 +544,9 @@ function AdvisorContent() {
                       )}
 
                       {!isUser && msg.sources && msg.sources.length > 0 && (
-                        <div className="pt-2 mt-2 border-t border-gray-800/80 text-xs">
-                          <div className="text-[11px] font-semibold text-gray-400 mb-1 flex items-center gap-1.5">
-                            <Icons.BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+                        <div className="pt-2 mt-2 text-xs" style={{ borderTop: "1px solid #E5E1D8" }}>
+                          <div className="text-[11px] font-semibold text-gray-500 mb-1.5 flex items-center gap-1.5">
+                            <Icons.BookOpen className="w-3.5 h-3.5" style={{ color: "#16A34A" }} />
                             <span>Verified Sources:</span>
                           </div>
                           <div className="flex flex-wrap gap-1.5">
@@ -513,10 +556,15 @@ function AdvisorContent() {
                               return (
                                 <span
                                   key={idx}
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-gray-950 border border-gray-800 text-[10px] text-gray-300"
+                                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px]"
+                                  style={{
+                                    background: "#F0EDE5",
+                                    border: "1px solid #E5E1D8",
+                                    color: "#374151",
+                                  }}
                                   title={`${title} (${sourceOrg})`}
                                 >
-                                  <Icons.CheckCircle className="w-3 h-3 text-emerald-400" />
+                                  <Icons.CheckCircle className="w-3 h-3 text-emerald-600" />
                                   <span className="truncate max-w-[200px]">{title}</span>
                                 </span>
                               );
@@ -540,7 +588,10 @@ function AdvisorContent() {
                     </div>
 
                     {isUser && (
-                      <div className="w-8 h-8 rounded-xl bg-emerald-800 border border-emerald-600 flex items-center justify-center text-xs font-bold text-white shrink-0 shadow-md">
+                      <div
+                        className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 shadow-md"
+                        style={{ background: "#F0EDE5", border: "1px solid #E5E1D8", color: "#1a3626" }}
+                      >
                         U
                       </div>
                     )}
@@ -550,11 +601,17 @@ function AdvisorContent() {
 
               {isLoading && (
                 <div className="flex items-start gap-3 justify-start animate-pulse">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-emerald-400 shrink-0">
-                    <Icons.Sparkles className="w-4 h-4" />
+                  <div
+                    className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "#E8F5EE", border: "1px solid #BBF7D0" }}
+                  >
+                    <Icons.Sparkles className="w-4 h-4" style={{ color: "#16A34A" }} />
                   </div>
-                  <div className="bg-gray-900/90 border border-gray-800 text-gray-400 rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-2.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+                  <div
+                    className="rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-2.5"
+                    style={{ background: "#ffffff", border: "1px solid #E5E1D8", color: "#6B7280" }}
+                  >
+                    <div className="w-2.5 h-2.5 rounded-full animate-ping" style={{ background: "#16A34A" }} />
                     <span>Searching extension knowledge base &amp; reasoning...</span>
                   </div>
                 </div>
@@ -564,19 +621,23 @@ function AdvisorContent() {
             </div>
           </div>
 
-          {/* Bottom Floating Input Section (ChatGPT / Gemini Style) */}
-          <div className="px-3 sm:px-6 pb-4 pt-2 bg-gradient-to-t from-gray-950 via-gray-950/90 to-transparent shrink-0">
+          {/* Bottom Input Section */}
+          <div
+            className="px-3 sm:px-6 pb-4 pt-3 shrink-0"
+            style={{ background: "#ffffff", borderTop: "1px solid #E5E1D8" }}
+          >
             <div className="max-w-3xl mx-auto space-y-2">
               {/* Quick Questions Chips */}
               <div className="overflow-x-auto no-scrollbar pb-1">
                 <div className="flex items-center gap-1.5 min-w-max">
-                  <span className="text-[11px] text-gray-500 font-medium mr-0.5">Suggestions:</span>
+                  <span className="text-[11px] text-gray-400 font-semibold mr-0.5">Suggestions:</span>
                   {QUICK_QUESTIONS[language].map((q, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleSendMessage(q)}
                       disabled={isLoading}
-                      className="px-2.5 py-1 rounded-xl bg-gray-900/90 hover:bg-gray-800 border border-gray-800 hover:border-emerald-600/60 text-[11px] text-gray-300 hover:text-emerald-300 transition-all disabled:opacity-50 cursor-pointer whitespace-nowrap shadow-sm"
+                      className="px-3 py-1.5 rounded-full text-[11px] font-medium transition-all disabled:opacity-50 cursor-pointer whitespace-nowrap"
+                      style={{ background: "#F0EDE5", color: "#374151", border: "1px solid #E5E1D8" }}
                     >
                       {q}
                     </button>
@@ -586,14 +647,17 @@ function AdvisorContent() {
 
               {/* Error Banner */}
               {error && (
-                <div className="p-3 rounded-2xl bg-rose-950/80 border border-rose-800 text-rose-200 text-xs flex items-center justify-between gap-2 animate-fade-in-up">
+                <div
+                  className="p-3 rounded-xl text-xs flex items-center justify-between gap-2 animate-fade-in-up"
+                  style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#DC2626" }}
+                >
                   <div className="flex items-center gap-2">
-                    <Icons.AlertTriangle className="w-4 h-4 text-rose-400" />
+                    <Icons.AlertTriangle className="w-4 h-4" />
                     <span>{error}</span>
                   </div>
                   <button
                     onClick={() => setError(null)}
-                    className="text-rose-300 hover:text-white p-1 text-sm cursor-pointer"
+                    className="hover:opacity-70 p-1 text-sm cursor-pointer"
                   >
                     ✕
                   </button>
@@ -606,7 +670,8 @@ function AdvisorContent() {
                   e.preventDefault();
                   handleSendMessage();
                 }}
-                className="flex items-end gap-2 bg-gray-900/95 border border-gray-800 focus-within:border-emerald-500/90 rounded-2xl p-2.5 transition-all shadow-xl shadow-black/40"
+                className="flex items-end gap-2 rounded-2xl p-2.5 transition-all"
+                style={{ background: "#F4F1E8", border: "1px solid #D1CEC8" }}
               >
                 <textarea
                   ref={inputRef}
@@ -622,13 +687,15 @@ function AdvisorContent() {
                       : "Ask CropDoctor AI about plant diseases, pests, symptoms, or sprays..."
                   }
                   dir={isRtl ? "rtl" : "ltr"}
-                  className="flex-1 bg-transparent border-0 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:ring-0 focus:outline-none resize-none max-h-28 px-2 py-1 leading-relaxed"
+                  className="flex-1 bg-transparent border-0 text-xs sm:text-sm placeholder-gray-400 focus:ring-0 focus:outline-none resize-none max-h-28 px-2 py-1 leading-relaxed"
+                  style={{ color: "#374151" }}
                 />
 
                 <button
                   type="submit"
                   disabled={!inputMessage.trim() || isLoading}
-                  className="p-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0 shadow-md shadow-emerald-950/50 active:scale-95"
+                  className="p-2.5 rounded-xl font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0 active:scale-95"
+                  style={{ background: "#1a3626", color: "#fff" }}
                   title="Send Question"
                 >
                   <Icons.Send className={`w-4 h-4 ${isRtl ? "rotate-180" : ""}`} />
@@ -636,9 +703,9 @@ function AdvisorContent() {
               </form>
 
               {/* Footnote */}
-              <div className="flex items-center justify-between text-[10px] text-gray-500 px-2">
+              <div className="flex items-center justify-between text-[10px] text-gray-400 px-2">
                 <span>Grounded in verified extension research. Not a substitute for lab diagnosis.</span>
-                <Link href="/expert" className="text-emerald-400 hover:underline">
+                <Link href="/expert" className="hover:underline" style={{ color: "#16A34A" }}>
                   Consult Agronomist →
                 </Link>
               </div>

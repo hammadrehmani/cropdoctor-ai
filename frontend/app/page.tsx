@@ -6,37 +6,6 @@ import { CROPS, LANGUAGES, UI_TRANSLATIONS } from "@/lib/constants";
 import type { Language } from "@/lib/types";
 import { Icons } from "@/components/ui/Icons";
 
-/* ── Testimonials ─────────────────────────────────────────────────────────── */
-const TESTIMONIALS = [
-  {
-    quote:
-      "CropDoctor's scanner detected early yellow rust in my wheat crop before it spread across the whole field. The Grad-CAM heatmap gave me total confidence in the diagnosis.",
-    author: "Muhammad Aslam",
-    role: "Wheat Farmer",
-    location: "Faisalabad, Punjab",
-    crop: "Wheat · 25 Acres",
-    initials: "MA",
-  },
-  {
-    quote:
-      "The 7-day weather risk forecast warned us about high humidity disease pressure for cotton leaf curl virus. It saved our harvest from catastrophic losses.",
-    author: "Haji Ghulam Rasool",
-    role: "Cotton Grower",
-    location: "Multan, Punjab",
-    crop: "Cotton · 40 Acres",
-    initials: "GR",
-  },
-  {
-    quote:
-      "Having the AI Advisor speak in Sindhi (سنڌي) is a true breakthrough for our local farmers. We get instant guidance without needing complex English apps.",
-    author: "Darya Khan Jamali",
-    role: "Rice Cultivator",
-    location: "Larkana, Sindh",
-    crop: "Basmati Rice · 18 Acres",
-    initials: "DJ",
-  },
-];
-
 /* ── FAQs ─────────────────────────────────────────────────────────────────── */
 const FAQS = [
   {
@@ -85,7 +54,6 @@ const FAQS = [
   },
 ];
 
-/* ── Trust Logos ───────────────────────────────────────────────────────────── */
 const TRUST_ITEMS = [
   { icon: "🔬", label: "EfficientNet-B0 Deep Learning" },
   { icon: "🌡️", label: "Open-Meteo Live Weather" },
@@ -96,40 +64,6 @@ const TRUST_ITEMS = [
   { icon: "🗺️", label: "Pakistan District Mapping" },
   { icon: "🛡️", label: "Zero-GPS Privacy" },
 ];
-
-/* ── Typing Animation Hook ────────────────────────────────────────────────── */
-function useTypingAnimation(phrases: string[], speed = 80, pause = 2000) {
-  const [text, setText] = useState("");
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentPhrase = phrases[phraseIndex];
-    const timeout = setTimeout(
-      () => {
-        if (!isDeleting) {
-          setText(currentPhrase.substring(0, charIndex + 1));
-          setCharIndex((i) => i + 1);
-          if (charIndex + 1 === currentPhrase.length) {
-            setTimeout(() => setIsDeleting(true), pause);
-          }
-        } else {
-          setText(currentPhrase.substring(0, charIndex - 1));
-          setCharIndex((i) => i - 1);
-          if (charIndex <= 1) {
-            setIsDeleting(false);
-            setPhraseIndex((p) => (p + 1) % phrases.length);
-          }
-        }
-      },
-      isDeleting ? speed / 2 : speed
-    );
-    return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, phraseIndex, phrases, speed, pause]);
-
-  return text;
-}
 
 /* ── Animated Counter ─────────────────────────────────────────────────────── */
 function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; suffix?: string; duration?: number }) {
@@ -159,12 +93,7 @@ function AnimatedCounter({ end, suffix = "", duration = 2000 }: { end: number; s
     return () => observer.disconnect();
   }, [end, duration]);
 
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -176,240 +105,175 @@ export default function HomePage() {
   const t = UI_TRANSLATIONS[lang] || UI_TRANSLATIONS.en;
   const isRtl = lang === "ur" || lang === "sd";
 
-  const typedText = useTypingAnimation(
-    [
-      "Detect Wheat Rust in Seconds",
-      "گندم کی کنگی فوری پہچانیں",
-      "Forecast Cotton CLCuD Risk",
-      "کپاس کے وائرس کا خطرہ جانیں",
-      "AI Advisor in اردو & سنڌي",
-    ],
-    70,
-    2200
-  );
-
   return (
-    <div
-      className="hero-bg min-h-screen text-gray-100 selection:bg-emerald-500 selection:text-white"
-      dir={isRtl ? "rtl" : "ltr"}
-    >
+    <div className="text-gray-900" dir={isRtl ? "rtl" : "ltr"}>
+
       {/* ═══════════════════════════════════════════════════════════════════════
-          1. HERO — Full-width immersive with particles, grid, typing animation
+          1. HERO — Croplyx-style dark forest green hero
           ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden pt-10 pb-20 sm:pt-16 sm:pb-28 px-4 sm:px-6 lg:px-8 grid-bg">
-        {/* Floating Particles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <div className="float-particle w-3 h-3 bg-emerald-400/20 top-[15%] left-[10%]" style={{ animationDelay: "0s" }} />
-          <div className="float-particle w-2 h-2 bg-amber-400/20 top-[30%] right-[15%]" style={{ animationDelay: "2s" }} />
-          <div className="float-particle w-4 h-4 bg-teal-400/15 top-[60%] left-[70%]" style={{ animationDelay: "4s" }} />
-          <div className="float-particle w-2.5 h-2.5 bg-indigo-400/15 top-[45%] left-[25%]" style={{ animationDelay: "1s" }} />
-          <div className="float-particle w-3 h-3 bg-emerald-300/10 top-[75%] right-[30%]" style={{ animationDelay: "3s" }} />
-          <div className="float-particle w-2 h-2 bg-amber-300/15 top-[20%] left-[55%]" style={{ animationDelay: "5s" }} />
-          {/* Decorative Orbit Ring */}
-          <div className="absolute top-[5%] right-[-5%] w-[500px] h-[500px] border border-emerald-500/[0.04] rounded-full animate-slow-spin" />
-          <div className="absolute top-[8%] right-[-3%] w-[440px] h-[440px] border border-amber-500/[0.03] rounded-full animate-slow-spin" style={{ animationDirection: "reverse", animationDuration: "35s" }} />
-        </div>
+      <section className="hero-croplyx min-h-screen flex items-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Subtle grid overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
-        <div className="mx-auto max-w-6xl space-y-10 text-center relative z-10">
-          {/* Top Controls */}
-          <div className="flex flex-wrap items-center justify-center gap-3 animate-reveal">
-            {/* Announcement Pill */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-700/60 bg-emerald-950/80 px-5 py-2 text-xs text-emerald-300 font-semibold shadow-lg shadow-emerald-950/40 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
-              <Icons.Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Next-Gen AI Crop Disease Intelligence</span>
+        {/* Floating ambient glows */}
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(74,154,107,0.15) 0%, transparent 70%)", filter: "blur(60px)" }} />
+        <div className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(233,168,0,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
+
+        <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-24 lg:py-32 relative z-10">
+
+          {/* Left: Text Content */}
+          <div className="space-y-8 animate-reveal">
+            {/* Badge + Language Switcher */}
+            <div className="flex flex-wrap items-center gap-3 animate-reveal">
+              <div className="section-label-dark">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                Smart Farming Made Simple
+              </div>
+              <div className="flex rounded-full bg-white/10 border border-white/15 p-1 text-xs gap-1">
+                {LANGUAGES.map((l) => (
+                  <button
+                    key={l.value}
+                    onClick={() => setLang(l.value)}
+                    className={`px-3 py-1 rounded-full font-semibold transition-all cursor-pointer text-xs ${
+                      lang === l.value
+                        ? "bg-white text-gray-900 shadow"
+                        : "text-white/70 hover:text-white"
+                    }`}
+                    aria-label={`Switch to ${l.label}`}
+                  >
+                    {l.nativeLabel}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Language Switcher */}
-            <div className="inline-flex rounded-xl bg-gray-900/90 border border-gray-800 p-1 text-xs shadow-inner backdrop-blur-sm">
-              {LANGUAGES.map((l) => (
-                <button
-                  key={l.value}
-                  onClick={() => setLang(l.value)}
-                  className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
-                    lang === l.value
-                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-900/50"
-                      : "text-gray-400 hover:text-gray-200"
-                  }`}
-                  aria-label={`Switch language to ${l.label}`}
-                >
-                  {l.nativeLabel}
-                </button>
-              ))}
+            {/* Main Headline */}
+            <div className="space-y-4 animate-reveal animate-reveal-d1">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.05]">
+                Grow Better with{" "}
+                <span style={{ color: "#4a9a6b" }}>Smart</span>{" "}
+                Insights
+              </h1>
+              <p className="text-lg text-white/65 max-w-lg leading-relaxed font-medium">
+                Real-time AI crop disease detection, Grad-CAM explainability, 7-day outbreak forecasting, and multilingual farming advice — all in one platform designed for Pakistani farmers.
+              </p>
             </div>
-          </div>
 
-          {/* Main Hero Typography */}
-          <div className="space-y-5 max-w-4xl mx-auto animate-reveal animate-reveal-d1">
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] text-gray-100">
-              <span className="block text-emerald-400 text-lg sm:text-xl lg:text-2xl font-extrabold mb-2 tracking-widest uppercase">
-                {t.appTitle}
-              </span>
-              <span>AI-Powered </span>
-              <span className="gradient-text">Crop Disease</span>
-              <br className="hidden sm:block" />
-              <span> Prediction & </span>
-              <span className="gradient-text">Farming Insights</span>
-            </h1>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 animate-reveal animate-reveal-d2">
+              <Link href="/diagnose" className="btn-gold">
+                <Icons.Camera className="w-5 h-5" />
+                <span>Scan My Crop</span>
+                <Icons.ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/advisor" className="btn-outline-white">
+                <Icons.Message className="w-5 h-5" />
+                <span>AI Advisor</span>
+              </Link>
+            </div>
 
-            <p className="text-sm sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed font-medium">
-              Empowering Pakistani farmers with{" "}
-              <strong className="text-emerald-300">Grad-CAM explainable vision</strong>, automated{" "}
-              <strong className="text-amber-300">OpenCV severity measurement</strong>, and proactive{" "}
-              <strong className="text-emerald-300">7-day district outbreak forecasting</strong>.
-            </p>
-
-            {/* Typing Animation */}
-            <div className="h-8 flex items-center justify-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-800/80 backdrop-blur-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-sm font-mono text-emerald-300/90">
-                  {typedText}
-                  <span className="animate-pulse text-emerald-400">|</span>
-                </span>
+            {/* Social Proof Ribbon */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/50 animate-reveal animate-reveal-d3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-green-400" />
+                <span><strong className="text-white/80">Thousands</strong> of analyses done</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full" style={{ background: "#E9A800" }} />
+                <span><strong className="text-white/80">98.4%</strong> accuracy</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Icons.Lock className="w-3.5 h-3.5 text-green-400" />
+                <span>Zero-GPS Privacy</span>
               </div>
             </div>
           </div>
 
-          {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto animate-reveal animate-reveal-d2">
-            <Link
-              href="/diagnose"
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-9 py-4 text-base font-bold text-white shadow-xl shadow-emerald-900/40 transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-800/50 glow-emerald cursor-pointer active:scale-[0.98]"
-            >
-              <Icons.Camera className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>{t.scanCrop}</span>
-              <Icons.ArrowRight className="w-4 h-4 opacity-60 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/risk-map"
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl border border-gray-700 bg-gray-900/90 hover:bg-gray-800 active:bg-gray-900 px-7 py-4 text-base font-bold text-gray-200 transition-all duration-200 hover:-translate-y-1 cursor-pointer backdrop-blur-sm"
-            >
-              <Icons.Map className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform" />
-              <span>{t.viewMap}</span>
-            </Link>
-          </div>
-
-          {/* Trust & Privacy Ribbon */}
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-gray-500 pt-1 animate-reveal animate-reveal-d3">
-            <div className="flex items-center gap-1.5 hover:text-gray-300 transition-colors">
-              <Icons.CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
-              <span>100% Free & Open Source</span>
-            </div>
-            <span className="text-gray-700">·</span>
-            <div className="flex items-center gap-1.5 hover:text-gray-300 transition-colors">
-              <Icons.ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Zero-GPS Tracking (Centroid Privacy)</span>
-            </div>
-            <span className="text-gray-700">·</span>
-            <div className="flex items-center gap-1.5 hover:text-gray-300 transition-colors">
-              <Icons.Lock className="w-3.5 h-3.5 text-emerald-500" />
-              <span>No Account or Password Required</span>
-            </div>
-          </div>
-
-          {/* ── INTERACTIVE SCANNER PREVIEW ──────────────────────────────────── */}
-          <div className="pt-8 max-w-4xl mx-auto animate-reveal animate-reveal-d4">
-            <div className="gradient-border glass p-6 sm:p-8 rounded-3xl shadow-2xl relative overflow-hidden text-left space-y-5">
-              {/* Glow decoration */}
-              <div className="absolute -top-20 -right-20 w-60 h-60 bg-emerald-500/10 rounded-full filter blur-3xl pointer-events-none animate-breathe" />
-              <div className="absolute -bottom-20 -left-20 w-52 h-52 bg-amber-500/8 rounded-full filter blur-3xl pointer-events-none animate-breathe" style={{ animationDelay: "1.5s" }} />
-
-              {/* Window Controls Header */}
-              <div className="flex items-center justify-between border-b border-gray-800/80 pb-4 text-xs relative">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <div className="h-3 w-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
-                    <div className="h-3 w-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
-                    <div className="h-3 w-3 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-colors" />
-                  </div>
-                  <span className="font-mono text-gray-500 pl-2 hidden sm:inline">cropdoctor-ai-scanner.live</span>
+          {/* Right: Floating Dashboard Card (Croplyx-style) */}
+          <div className="relative animate-reveal animate-reveal-d2 animate-float hidden lg:block">
+            {/* Main card */}
+            <div className="hero-card p-6 space-y-5">
+              {/* Header */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-xs font-semibold text-gray-500">Crop Scanner</div>
+                  <div className="text-base font-bold text-gray-900">Today&rsquo;s Field Report</div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-lg bg-emerald-950/90 border border-emerald-800/60 text-emerald-300 font-mono text-[11px] font-bold animate-pulse-glow">
-                    ● LIVE INFERENCE
-                  </span>
+                <div className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "#16A34A" }}>
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  Live
                 </div>
               </div>
 
-              {/* Simulation Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-                {/* Visual Scan Window */}
-                <div className="sm:col-span-5 relative rounded-2xl bg-gray-950 border border-gray-800 aspect-[4/3] flex items-center justify-center overflow-hidden group">
-                  <div className="w-20 h-20 rounded-2xl bg-emerald-950/80 border border-emerald-700/40 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform duration-500">
-                    <Icons.Leaf className="w-10 h-10 text-emerald-400" />
-                  </div>
-                  {/* Scan laser */}
-                  <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_15px_#34d399] animate-scan-laser" />
-                  {/* Corner Brackets */}
-                  <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-emerald-500/40 rounded-tl-sm" />
-                  <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-emerald-500/40 rounded-tr-sm" />
-                  <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-emerald-500/40 rounded-bl-sm" />
-                  <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-emerald-500/40 rounded-br-sm" />
-                  <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-black/80 text-[10px] text-gray-400 font-mono backdrop-blur-sm border border-gray-800/60">
-                    Wheat Leaf · Live Preview
-                  </div>
+              {/* Crop Health Score */}
+              <div className="rounded-2xl p-4 space-y-3" style={{ background: "#F6FDF8", border: "1px solid #D1FAE5" }}>
+                <div className="text-xs font-bold uppercase tracking-wider text-gray-400">CROP HEALTH</div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-black text-gray-900">95.6%</span>
+                  <span className="text-sm font-semibold text-green-600">Leaf Rust Detected</span>
                 </div>
-
-                {/* Simulated Outputs */}
-                <div className="sm:col-span-7 space-y-4">
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-widest">
-                        Diagnosis Output
-                      </span>
-                      <span className="text-xs font-bold text-emerald-300 bg-emerald-950/80 px-3 py-1 rounded-lg border border-emerald-800/60">
-                        95.6% Confidence
-                      </span>
-                    </div>
-                    <h2 className="text-xl sm:text-2xl font-black text-gray-100 tracking-tight">
-                      Leaf Rust <span className="text-gray-500 text-sm font-medium">(Puccinia triticina)</span>
-                    </h2>
-                  </div>
-
-                  {/* Severity Bar */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs text-gray-400">
-                      <span className="font-medium">OpenCV Lesion Severity</span>
-                      <span className="font-bold text-emerald-400">12.8% — Low Severity</span>
-                    </div>
-                    <div className="w-full bg-gray-900 rounded-full h-2.5 overflow-hidden border border-gray-800">
-                      <div
-                        className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full transition-all duration-1000"
-                        style={{ width: "28%" }}
-                      />
-                    </div>
-                    <div className="flex justify-between text-[10px] text-gray-600 font-mono">
-                      <span>0%</span>
-                      <span>Low</span>
-                      <span>Medium</span>
-                      <span>High</span>
-                      <span>100%</span>
-                    </div>
-                  </div>
-
-                  {/* Tags & CTA */}
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-[11px] text-gray-300 font-medium">
-                      <Icons.Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                      Grad-CAM Verified
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-[11px] text-gray-300 font-medium">
-                      <Icons.Activity className="w-3.5 h-3.5 text-teal-400" />
-                      OpenCV Measured
-                    </span>
-                    <Link
-                      href="/diagnose"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-950/60 border border-emerald-800/60 px-4 py-1.5 rounded-lg transition-all hover:bg-emerald-950/90 cursor-pointer group"
-                    >
-                      <span>Try Scanner Now</span>
-                      <Icons.ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                    </Link>
-                  </div>
+                <div className="progress-bar">
+                  <div className="progress-bar-fill" style={{ width: "27%" }} />
                 </div>
+                <div className="flex justify-between text-xs text-gray-400">
+                  <span>Confidence</span>
+                  <span className="font-bold text-gray-700">95.6%</span>
+                </div>
+              </div>
+
+              {/* Scan Stats */}
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { label: "Analyses", value: "1,200+" },
+                  { label: "Accuracy", value: "98.4%", highlight: true },
+                  { label: "Response", value: "<2s" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-xl p-3 text-center"
+                    style={{
+                      background: stat.highlight ? "#1a3626" : "#F4F1E8",
+                      color: stat.highlight ? "#fff" : "#374151",
+                    }}
+                  >
+                    <div className="text-sm font-bold">{stat.value}</div>
+                    <div className="text-[10px] opacity-60 mt-0.5">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Scan laser animation on a leaf icon */}
+              <div className="relative rounded-xl overflow-hidden h-10 flex items-center justify-center" style={{ background: "#F4F1E8" }}>
+                <div className="flex items-center gap-2 text-xs font-semibold text-gray-600">
+                  <Icons.Leaf className="w-4 h-4 text-green-600" />
+                  <span>AI Advisor · Ready to help</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Status Badge */}
+            <div className="absolute -top-4 -left-4 hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold text-gray-800">
+              <span className="text-lg">🌿</span>
+              <div>
+                <div className="text-xs text-gray-400">Status</div>
+                <div className="font-bold text-green-600">Healthy</div>
+              </div>
+            </div>
+
+            {/* Floating Price Alert Badge */}
+            <div className="absolute -bottom-4 -right-4 hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold" style={{ color: "#1a3626" }}>
+              <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ background: "#1a3626" }}>
+                <Icons.Activity className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-400">Risk Map</div>
+                <div className="font-bold" style={{ color: "#E9A800" }}>Low Risk</div>
               </div>
             </div>
           </div>
@@ -419,124 +283,41 @@ export default function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════════════
           TRUST MARQUEE — Horizontal scrolling tech stack
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section className="py-6 overflow-hidden bg-gray-950/60">
-        <div className="relative">
+      <div style={{ background: "#F0EDE5", borderTop: "1px solid #E5E1D8", borderBottom: "1px solid #E5E1D8" }}>
+        <div className="py-4 overflow-hidden relative">
           <div className="flex animate-ticker">
             {[...TRUST_ITEMS, ...TRUST_ITEMS].map((item, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-2 px-6 py-2 text-xs text-gray-500 font-medium whitespace-nowrap shrink-0"
+                className="flex items-center gap-2.5 px-8 py-1.5 whitespace-nowrap shrink-0"
+                style={{ color: "#6B7280", fontSize: "13px", fontWeight: 600 }}
               >
                 <span className="text-base">{item.icon}</span>
                 <span>{item.label}</span>
+                <span className="mx-4" style={{ color: "#D1CEC8" }}>·</span>
               </div>
             ))}
           </div>
         </div>
-      </section>
-      <div className="section-divider" />
+      </div>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          2. METRICS — Animated counters with gradient borders
+          2. METRICS — Light cream section with stat cards
           ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-950/40">
+      <section className="section-light py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="gradient-border glass p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center text-center space-y-1 group hover:bg-gray-900/60 transition-all">
-              <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight text-center w-full">
-                <AnimatedCounter end={98} suffix=".4%" />
-              </div>
-              <div className="text-xs text-gray-500 font-medium group-hover:text-gray-400 transition-colors text-center">
-                Diagnostic Precision
-              </div>
-            </div>
-            <div className="gradient-border glass p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center text-center space-y-1 group hover:bg-gray-900/60 transition-all">
-              <div className="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight text-center">7 Days</div>
-              <div className="text-xs text-gray-500 font-medium group-hover:text-gray-400 transition-colors text-center">
-                Outbreak Risk Horizon
-              </div>
-            </div>
-            <div className="gradient-border glass p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center text-center space-y-1 group hover:bg-gray-900/60 transition-all">
-              <div className="text-3xl sm:text-4xl font-black text-indigo-400 tracking-tight text-center w-full">
-                <AnimatedCounter end={30} suffix="+" />
-              </div>
-              <div className="text-xs text-gray-500 font-medium group-hover:text-gray-400 transition-colors text-center">
-                Pakistan Districts
-              </div>
-            </div>
-            <div className="gradient-border glass p-5 sm:p-6 rounded-2xl flex flex-col items-center justify-center text-center space-y-1 group hover:bg-gray-900/60 transition-all">
-              <div className="text-3xl sm:text-4xl font-black text-teal-400 tracking-tight text-center">3 Languages</div>
-              <div className="text-xs text-gray-500 font-medium group-hover:text-gray-400 transition-colors text-center">
-                English · اردو · سنڌي
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          3. WHAT WE DO — Gradient-bordered feature cards
-          ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="what-we-do" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950/70 scroll-mt-20">
-        <div className="mx-auto max-w-5xl space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
-              <Icons.Sparkles className="w-3.5 h-3.5" />
-              <span>What We Do</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-100 tracking-tight">
-              Bridging Computer Vision{" "}
-              <span className="gradient-text">with Farm Triage</span>
-            </h2>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              CropDoctor AI replaces guesswork with a full plant disease and pest diagnostic pipeline designed for smallholders, agronomists, and regional policy makers.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              {
-                icon: <Icons.Scan className="w-7 h-7" />,
-                color: "emerald",
-                title: "Explainable Image Diagnosis",
-                desc: "We analyze crop leaf photos in real time with EfficientNet-B0 and provide transparent Grad-CAM attention heatmaps showing the exact symptom clusters.",
-                badge: "Deep Learning",
-              },
-              {
-                icon: <Icons.Activity className="w-7 h-7" />,
-                color: "amber",
-                title: "Automated Severity Triage",
-                desc: "Using OpenCV color segmentation, we calculate the precise percentage of damaged leaf area (0% to 100%) so farmers know the true severity tier.",
-                badge: "Computer Vision",
-              },
-              {
-                icon: <Icons.CloudSun className="w-7 h-7" />,
-                color: "indigo",
-                title: "Proactive Risk Forewarning",
-                desc: "We connect farm diagnoses with 7-day meteorological forecasts from Open-Meteo, predicting regional epidemic pressure via XGBoost decision trees.",
-                badge: "Predictive ML",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="gradient-border glass p-7 rounded-3xl space-y-4 glass-hover group"
-              >
-                <div className="flex items-center justify-between">
-                  <div
-                    className={`w-14 h-14 rounded-2xl bg-${item.color}-950/80 border border-${item.color}-700/40 flex items-center justify-center text-${item.color}-400 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    {item.icon}
-                  </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-wider text-${item.color}-500/60 bg-${item.color}-950/40 px-2 py-0.5 rounded-md border border-${item.color}-800/30`}>
-                    {item.badge}
-                  </span>
+              { value: <AnimatedCounter end={98} suffix=".4%" />, label: "Diagnostic Precision", color: "#1a3626" },
+              { value: "7 Days", label: "Outbreak Risk Horizon", color: "#1a3626" },
+              { value: <AnimatedCounter end={30} suffix="+" />, label: "Pakistan Districts", color: "#1a3626" },
+              { value: "3 Lang.", label: "English · اردو · سنڌي", color: "#1a3626" },
+            ].map((stat, idx) => (
+              <div key={idx} className="card-croplyx p-6 flex flex-col items-center text-center space-y-2">
+                <div className="text-3xl sm:text-4xl font-black" style={{ color: stat.color }}>
+                  {stat.value}
                 </div>
-                <h3 className="text-lg font-bold text-gray-100 group-hover:text-emerald-300 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{item.desc}</p>
+                <div className="text-xs text-gray-500 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -544,97 +325,109 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          4. SERVICES — Rich feature grid with hover cards & CTA
+          3. SERVICES — Croplyx "Tools built for real farmers" style (light bg)
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950/50 scroll-mt-20">
+      <section id="what-we-do" className="section-light py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20" style={{ background: "#F0EDE5" }}>
         <div className="mx-auto max-w-6xl space-y-14">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
-              <Icons.Layers className="w-3.5 h-3.5" />
-              <span>Our Services</span>
+          {/* Header */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+            <div className="space-y-4">
+              <span className="section-label">
+                <Icons.Sparkles className="w-3.5 h-3.5" />
+                Our Services
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black leading-tight tracking-tight" style={{ color: "#1a1a1a" }}>
+                Tools built for{" "}
+                <span style={{ color: "#4a9a6b" }}>real farmers</span>,
+                <br />designed for{" "}
+                <span style={{ color: "#4a9a6b" }}>real fields.</span>
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-100 tracking-tight">
-              Tools Built for{" "}
-              <span className="gradient-text">Real Pakistani Farmers</span>
-            </h2>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Comprehensive suite of agricultural intelligence tools accessible on any mobile browser.
+            <p className="text-base text-gray-500 leading-relaxed max-w-sm">
+              Simple, helpful tools to make better farming decisions and protect your harvest with AI-powered confidence.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Service Cards — White on cream */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               {
                 icon: <Icons.Scan className="w-6 h-6" />,
-                colorClass: "emerald",
+                iconBg: "#E8F5EE",
+                iconColor: "#16A34A",
                 title: "AI Disease Detection",
-                desc: "Instant multi-class neural classification across Cotton, Wheat, Rice, and Sugarcane with honest certainty scoring.",
+                desc: "Instant multi-class neural classification for Cotton, Wheat, Rice, and Sugarcane with confidence scoring and honest uncertainty reporting.",
                 link: "/diagnose",
                 linkText: "Launch Scanner",
+                tag: "Active",
+                features: ["Real-time inference", "EfficientNet-B0 model", "Multi-crop support"],
               },
               {
                 icon: <Icons.Activity className="w-6 h-6" />,
-                colorClass: "amber",
+                iconBg: "#FEF9E7",
+                iconColor: "#E9A800",
                 title: "OpenCV Severity & Grad-CAM",
-                desc: "Automated lesion area measurement alongside visual attention heatmaps that explain the neural network's diagnosis.",
+                desc: "Automated lesion area measurement alongside visual attention heatmaps that explain exactly what the neural network is seeing on your leaf.",
                 link: "/how-it-works",
                 linkText: "See How It Works",
+                tag: "Active",
+                features: ["Grad-CAM heatmaps", "Lesion % measurement", "Explainable AI"],
               },
               {
                 icon: <Icons.CloudSun className="w-6 h-6" />,
-                colorClass: "indigo",
+                iconBg: "#EEF2FF",
+                iconColor: "#6366F1",
                 title: "7-Day Outbreak Forecasting",
-                desc: "XGBoost epidemiological modeling integrating live Open-Meteo forecasts to predict disease pressure before it spreads.",
+                desc: "XGBoost epidemiological modeling integrating live Open-Meteo forecasts to predict disease pressure before it spreads through your district.",
                 link: "/risk-map",
                 linkText: "View Risk Map",
+                tag: "Active",
+                features: ["Live weather data", "XGBoost risk model", "District-level maps"],
               },
               {
                 icon: <Icons.Message className="w-6 h-6" />,
-                colorClass: "teal",
+                iconBg: "#F0FDF4",
+                iconColor: "#16A34A",
                 title: "Multilingual AI Agronomist",
-                desc: "Ask farming questions in English, Urdu, or Sindhi. RAG grounded in verified data from FAO and CCRI Multan.",
+                desc: "Ask farming questions in English, Urdu, or Sindhi. Our RAG-powered advisor is grounded in FAO and CCRI Multan verified data.",
                 link: "/advisor",
                 linkText: "Chat with Advisor",
-              },
-              {
-                icon: <Icons.Lock className="w-6 h-6" />,
-                colorClass: "rose",
-                title: "100% Geo-Privacy Protected",
-                desc: "Your exact farm coordinates are never stored. Telemetry is anonymized to district centroids with zero data leakage.",
-                link: "/safety",
-                linkText: "Safety Charter",
-              },
-              {
-                icon: <Icons.PhoneCall className="w-6 h-6" />,
-                colorClass: "purple",
-                title: "Certified Expert Escalation",
-                desc: "When cases are uncertain, CropDoctor connects you directly to toll-free extension hotlines and WhatsApp agronomists.",
-                link: "/expert",
-                linkText: "Consult Experts",
+                tag: "Active",
+                features: ["English, اردو, سنڌي", "RAG grounded", "Expert escalation"],
               },
             ].map((svc, idx) => (
-              <div
-                key={idx}
-                className="gradient-border glass p-6 rounded-3xl glass-hover flex flex-col justify-between space-y-4 group"
-              >
-                <div className="space-y-3">
+              <div key={idx} className="card-croplyx p-7 space-y-5 flex flex-col">
+                <div className="flex items-start justify-between">
                   <div
-                    className={`w-12 h-12 rounded-2xl bg-${svc.colorClass}-950/80 border border-${svc.colorClass}-700/40 flex items-center justify-center text-${svc.colorClass}-400 group-hover:scale-110 transition-transform`}
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{ background: svc.iconBg, color: svc.iconColor }}
                   >
                     {svc.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-gray-100 group-hover:text-emerald-300 transition-colors">
-                    {svc.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">{svc.desc}</p>
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1.5" style={{ background: "#E8F5EE", color: "#16A34A" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    {svc.tag}
+                  </span>
                 </div>
+                <div className="space-y-2 flex-1">
+                  <h3 className="text-xl font-bold text-gray-900">{svc.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{svc.desc}</p>
+                </div>
+                <ul className="space-y-1.5">
+                  {svc.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
+                      <Icons.CheckCircle className="w-4 h-4 shrink-0" style={{ color: "#4a9a6b" }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
                 <Link
                   href={svc.link}
-                  className={`text-xs font-bold text-${svc.colorClass}-400 hover:text-${svc.colorClass}-300 inline-flex items-center gap-1.5 group/link`}
+                  className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors group"
+                  style={{ color: "#4a9a6b" }}
                 >
-                  <span>{svc.linkText}</span>
-                  <Icons.ArrowRight className="w-3 h-3 group-hover/link:translate-x-1 transition-transform" />
+                  {svc.linkText}
+                  <Icons.ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             ))}
@@ -643,49 +436,133 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          5. HOW IT WORKS — Connected timeline
+          4. DISEASE RISK PREDICTION — Dark section (Croplyx premium dark card)
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="how-it-works" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20 bg-gray-950/30 grid-bg">
-        <div className="mx-auto max-w-5xl space-y-14">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
-              <Icons.Zap className="w-3.5 h-3.5" />
-              <span>How It Works</span>
+      <section className="section-light px-4 sm:px-6 lg:px-8 py-10" style={{ background: "#F0EDE5" }}>
+        <div className="mx-auto max-w-6xl">
+          <div className="rounded-3xl p-10 sm:p-14 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center" style={{ background: "#1a3626" }}>
+            {/* Left */}
+            <div className="space-y-7">
+              <span className="section-label-dark">
+                <Icons.ShieldCheck className="w-3.5 h-3.5" />
+                Premium Service
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+                Disease Risk{" "}
+                <span style={{ color: "#4a9a6b" }}>Prediction.</span>
+              </h2>
+              <p className="text-white/60 text-base leading-relaxed max-w-sm">
+                Our smart crop disease prediction uses environmental data analysis to forecast disease and pest risks early, protecting your harvest and improving your yields.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { icon: <Icons.Zap className="w-4 h-4" />, label: "Early risk prediction" },
+                  { icon: <Icons.Sparkles className="w-4 h-4" />, label: "Detailed recommendations" },
+                  { icon: <Icons.Leaf className="w-4 h-4" />, label: "Environmental analysis" },
+                  { icon: <Icons.ShieldCheck className="w-4 h-4" />, label: "Fast results" },
+                ].map((f) => (
+                  <div key={f.label} className="feature-tag-dark">
+                    {f.icon}
+                    {f.label}
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-3 pt-2">
+                <Link href="/diagnose" className="btn-gold">Try Free Demo <Icons.ArrowRight className="w-4 h-4" /></Link>
+                <Link href="/risk-map" className="btn-outline-white">View Risk Map</Link>
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-100 tracking-tight">
-              Simple <span className="gradient-text">4-Step</span> Decision Loop
+
+            {/* Right: Floating Result Card */}
+            <div className="flex justify-center">
+              <div className="hero-card p-6 w-full max-w-sm space-y-5">
+                <div className="flex items-center justify-between text-sm font-bold text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <Icons.Scan className="w-5 h-5 text-green-600" />
+                    <span>Crop Scanner</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-green-600 text-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                    Live
+                  </div>
+                </div>
+
+                <div className="rounded-xl p-4 space-y-3" style={{ background: "#F4F1E8" }}>
+                  <div className="flex items-center gap-2">
+                    <Icons.Leaf className="w-5 h-5 text-green-600" />
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-gray-400">DETECTED</div>
+                      <div className="font-bold text-gray-900">Leaf Blight</div>
+                    </div>
+                  </div>
+                  <div className="progress-bar">
+                    <div className="progress-bar-fill" style={{ width: "94.7%" }} />
+                  </div>
+                  <div className="text-xs text-right font-bold text-gray-500">94.7%</div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { v: "1,200+", l: "Analyses" },
+                    { v: "98%", l: "Accuracy", dark: true },
+                    { v: "<2s", l: "Response" },
+                  ].map((s) => (
+                    <div
+                      key={s.l}
+                      className="rounded-xl p-3 text-center"
+                      style={{ background: s.dark ? "#1a3626" : "#F4F1E8", color: s.dark ? "#fff" : "#374151" }}
+                    >
+                      <div className="font-bold text-sm">{s.v}</div>
+                      <div className="text-[10px] opacity-60 mt-0.5">{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          5. HOW IT WORKS — White section with numbered steps
+          ═══════════════════════════════════════════════════════════════════════ */}
+      <section id="how-it-works" className="section-white py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+        <div className="mx-auto max-w-5xl space-y-14">
+          <div className="text-center space-y-4">
+            <span className="section-label">
+              <Icons.Zap className="w-3.5 h-3.5" />
+              How It Works
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900">
+              Simple <span style={{ color: "#4a9a6b" }}>4-Step</span> Decision Loop
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-gray-500 max-w-md mx-auto">
               Designed for fast field diagnostics on low-bandwidth mobile devices.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative">
-            {/* Connecting Line (desktop only) */}
-            <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-[2px] bg-gradient-to-r from-emerald-500/20 via-emerald-500/10 to-emerald-500/20" />
+            {/* Connecting line */}
+            <div className="hidden lg:block absolute top-10 left-[12%] right-[12%] h-px" style={{ background: "linear-gradient(90deg, transparent, #D1FAE5, transparent)" }} />
 
             {[
-              { step: "01", icon: <Icons.Camera className="w-5 h-5" />, title: "Snap Leaf Photo", desc: "Capture a close-up photo of the affected leaf via mobile camera or upload from gallery." },
+              { step: "01", icon: <Icons.Camera className="w-5 h-5" />, title: "Snap Leaf Photo", desc: "Capture a close-up of the affected leaf via mobile camera or upload from gallery." },
               { step: "02", icon: <Icons.Activity className="w-5 h-5" />, title: "AI Diagnosis & Severity", desc: "EfficientNet classifies the disease while OpenCV measures damaged leaf surface percentage." },
               { step: "03", icon: <Icons.Sparkles className="w-5 h-5" />, title: "Inspect Grad-CAM", desc: "Verify the visual heatmap proving the model focused on real symptoms, not artifacts." },
-              { step: "04", icon: <Icons.Message className="w-5 h-5" />, title: "Take Action & Ask AI", desc: "Check 7-day outbreak forecasts and get grounded management advice in Urdu/Sindhi." },
+              { step: "04", icon: <Icons.Message className="w-5 h-5" />, title: "Take Action & Ask AI", desc: "Check 7-day outbreak forecasts and get grounded management advice in Urdu or Sindhi." },
             ].map((s, idx) => (
-              <div key={idx} className="gradient-border glass p-6 rounded-2xl space-y-3 relative glass-hover group">
-                {/* Step Number Orb */}
-                <div className="absolute -top-3 left-5 w-6 h-6 rounded-full bg-emerald-600 border-2 border-gray-950 flex items-center justify-center text-[10px] font-black text-white shadow-lg z-10">
+              <div key={idx} className="card-croplyx p-6 space-y-4 relative">
+                <div className="absolute -top-3 left-5 w-7 h-7 rounded-full text-white text-xs font-black flex items-center justify-center shadow" style={{ background: "#1a3626" }}>
                   {idx + 1}
                 </div>
-                <div className="text-[11px] font-black text-emerald-500/60 tracking-widest pt-2">
+                <div className="text-[10px] font-black tracking-widest pt-3" style={{ color: "#4a9a6b" }}>
                   STEP {s.step}
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/60 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "#E8F5EE", color: "#16A34A" }}>
                   {s.icon}
                 </div>
-                <h3 className="font-bold text-gray-100 text-sm group-hover:text-emerald-300 transition-colors">
-                  {s.title}
-                </h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{s.desc}</p>
+                <h3 className="font-bold text-gray-900 text-sm">{s.title}</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
@@ -693,30 +570,29 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          6. SUPPORTED CROPS — Interactive crop cards
+          6. SUPPORTED CROPS — Light cream section
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="crops" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-950/80 scroll-mt-20">
+      <section id="crops" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20" style={{ background: "#F0EDE5" }}>
         <div className="mx-auto max-w-5xl space-y-10">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-bold mb-1.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-2">
+              <span className="section-label">
                 <Icons.Leaf className="w-3.5 h-3.5" />
-                <span>Agricultural Coverage</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-gray-100">
-                Supported Staple & Cash Crops
+                Agricultural Coverage
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
+                Supported Crops
               </h2>
-              <p className="text-xs sm:text-sm text-gray-400 mt-1">
-                Trained specifically on major Pakistani agro-climatic zones across Punjab, Sindh, KPK & Balochistan.
+              <p className="text-sm text-gray-500">
+                Trained on major Pakistani agro-climatic zones — Punjab, Sindh, KPK & Balochistan.
               </p>
             </div>
             <Link
               href="/diagnose"
-              className="group text-xs font-bold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1.5 bg-gray-900 border border-gray-800 hover:border-emerald-600/50 px-4 py-2.5 rounded-xl transition-all"
+              className="btn-dark text-sm"
             >
-              <span>Scan Any Crop</span>
-              <Icons.ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+              Scan Any Crop
+              <Icons.ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -725,19 +601,19 @@ export default function HomePage() {
               <Link
                 key={crop.value}
                 href={`/diagnose?crop=${crop.value}`}
-                className="gradient-border glass p-5 rounded-2xl hover:border-emerald-500/80 hover:bg-gray-900/90 transition-all flex flex-col justify-between space-y-3 group cursor-pointer glass-hover"
+                className="card-croplyx p-5 flex flex-col justify-between space-y-4 group cursor-pointer"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-4xl group-hover:scale-110 transition-transform">{crop.emoji}</span>
-                  <span className="text-xs text-gray-500 font-serif" dir="rtl">
+                  <span className="text-xs text-gray-400 font-serif" dir="rtl">
                     {lang === "sd" ? crop.labelSd : crop.labelUr}
                   </span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-100 group-hover:text-emerald-400 text-sm transition-colors">
+                  <div className="font-bold text-gray-900 text-sm group-hover:text-green-700 transition-colors">
                     {crop.label}
                   </div>
-                  <div className="text-[11px] text-gray-500">Full AI & Severity Tracking</div>
+                  <div className="text-[11px] text-gray-400 mt-0.5">Full AI & Severity Tracking</div>
                 </div>
               </Link>
             ))}
@@ -746,105 +622,86 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          7. OUR STORY + MISSION — Combined elegant section
+          7. OUR STORY — White section
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="our-story" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="mx-auto max-w-5xl space-y-16">
-          {/* Story */}
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
+      <section id="our-story" className="section-white py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
+        <div className="mx-auto max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          <div className="space-y-6">
+            <span className="section-label">
               <Icons.BookOpen className="w-3.5 h-3.5" />
-              <span>Our Story</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-100 tracking-tight">
-              Why We Built <span className="gradient-text">CropDoctor AI</span>
+              Our Story
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-gray-900 leading-tight">
+              Why We Built{" "}
+              <span style={{ color: "#4a9a6b" }}>CropDoctor AI</span>
             </h2>
-            <div className="gradient-border glass p-7 sm:p-9 rounded-3xl space-y-4 text-sm text-gray-300 leading-relaxed shadow-xl text-left">
-              <p>
-                Agriculture is the backbone of Pakistan, contributing over{" "}
-                <strong className="text-gray-100">22% of national GDP</strong> and sustaining millions of
-                smallholder families. Yet every harvest season, catastrophic fungal and viral epidemics—such as{" "}
-                <strong className="text-amber-300">Wheat Leaf Rust</strong>,{" "}
-                <strong className="text-amber-300">Cotton Leaf Curl Virus (CLCuD)</strong>, and{" "}
-                <strong className="text-amber-300">Rice Blast</strong>—wipe out yields before farmers even
-                realize the danger.
-              </p>
-              <p>
-                Existing solutions are either expensive commercial software or simplistic black-box classifiers
-                that leave farmers with more questions than answers. We created{" "}
-                <strong className="text-emerald-300">CropDoctor AI</strong> to give Pakistani farmers an
-                AI-Powered Plant Disease &amp; Pest Identification System for Smart Farming: explainable, severity-aware, and predictive copilot that speaks their own language and works
-                seamlessly on any mobile phone without login friction.
-              </p>
-            </div>
+            <p className="text-gray-600 leading-relaxed">
+              Agriculture contributes over <strong>22% of Pakistan&apos;s national GDP</strong> and sustains millions of smallholder families. Yet every harvest season, fungal and viral epidemics — Wheat Leaf Rust, Cotton CLCuD, Rice Blast — wipe out yields before farmers realize the danger.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              We created CropDoctor AI to give Pakistani farmers an explainable, severity-aware, and predictive copilot that speaks their own language and works seamlessly on any mobile phone without login friction.
+            </p>
+            <Link href="/about" className="btn-dark inline-flex">
+              Learn More <Icons.ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
           {/* Mission Pillars */}
-          <div className="space-y-8">
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
-                <Icons.Target className="w-3.5 h-3.5" />
-                <span>Our Mission</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-gray-100 tracking-tight">
-                3 Pillars of <span className="gradient-text">Agricultural Resilience</span>
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  icon: <Icons.Users className="w-7 h-7" />,
-                  color: "emerald",
-                  title: "Empowerment Through Knowledge",
-                  desc: "Democratizing advanced computer vision and agronomic insights for smallholders in Urdu and Sindhi without expensive hardware.",
-                },
-                {
-                  icon: <Icons.Leaf className="w-7 h-7" />,
-                  color: "teal",
-                  title: "Sustainability via Precision",
-                  desc: "Preventing pesticide overuse, protecting soil and groundwater, and refusing automated chemical prescriptions.",
-                },
-                {
-                  icon: <Icons.Award className="w-7 h-7" />,
-                  color: "amber",
-                  title: "Prosperity Through Forewarning",
-                  desc: "Moving from reactive damage control to proactive 7-day epidemiological risk forecasting for family food security.",
-                },
-              ].map((p, idx) => (
-                <div key={idx} className="gradient-border glass p-7 rounded-3xl space-y-4 glass-hover group">
-                  <div
-                    className={`w-14 h-14 rounded-2xl bg-${p.color}-950/80 border border-${p.color}-700/40 flex items-center justify-center text-${p.color}-400 group-hover:scale-110 transition-transform`}
-                  >
-                    {p.icon}
-                  </div>
-                  <h3 className="text-base font-bold text-gray-100 group-hover:text-emerald-300 transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 leading-relaxed">{p.desc}</p>
+          <div className="space-y-4">
+            {[
+              {
+                icon: <Icons.Users className="w-5 h-5" />,
+                color: "#E8F5EE",
+                iconColor: "#16A34A",
+                title: "Empowerment Through Knowledge",
+                desc: "Democratizing advanced computer vision for smallholders in Urdu and Sindhi without expensive hardware.",
+              },
+              {
+                icon: <Icons.Leaf className="w-5 h-5" />,
+                color: "#F0FDF4",
+                iconColor: "#16A34A",
+                title: "Sustainability via Precision",
+                desc: "Preventing pesticide overuse, protecting soil and groundwater, and refusing automated chemical prescriptions.",
+              },
+              {
+                icon: <Icons.Award className="w-5 h-5" />,
+                color: "#FEF9E7",
+                iconColor: "#E9A800",
+                title: "Prosperity Through Forewarning",
+                desc: "Moving from reactive damage control to proactive 7-day epidemiological risk forecasting.",
+              },
+            ].map((p, idx) => (
+              <div key={idx} className="card-croplyx p-5 flex items-start gap-4">
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: p.color, color: p.iconColor }}
+                >
+                  {p.icon}
                 </div>
-              ))}
-            </div>
+                <div>
+                  <div className="font-bold text-gray-900 text-sm">{p.title}</div>
+                  <div className="text-xs text-gray-500 mt-1 leading-relaxed">{p.desc}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          8. TRUSTED SOURCES — Institutional credibility
+          8. TRUSTED SOURCES — Cream section
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="trusted-advisor" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-950/60 scroll-mt-20">
+      <section id="trusted-advisor" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20" style={{ background: "#F0EDE5" }}>
         <div className="mx-auto max-w-4xl space-y-10 text-center">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
+          <div className="space-y-4">
+            <span className="section-label">
               <Icons.ShieldCheck className="w-3.5 h-3.5" />
-              <span>Trusted Knowledge Grounding</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-gray-100">
-              Grounded in <span className="gradient-text">Verified Agronomic Literature</span>
+              Trusted Knowledge Grounding
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
+              Grounded in <span style={{ color: "#4a9a6b" }}>Verified Agronomic Literature</span>
             </h2>
-            <p className="text-sm text-gray-400 max-w-xl mx-auto">
+            <p className="text-sm text-gray-500 max-w-xl mx-auto">
               Our RAG intelligence pipeline queries verified agricultural extension repositories across Pakistan.
             </p>
           </div>
@@ -856,18 +713,16 @@ export default function HomePage() {
               { icon: <Icons.Activity className="w-5 h-5" />, name: "PARC (Pakistan Agricultural Research)", desc: "National cereal & sugarcane advisory data" },
               { icon: <Icons.PhoneCall className="w-5 h-5" />, name: "Provincial Extension Departments", desc: "Punjab & Sindh official agronomic hotlines" },
             ].map((src, idx) => (
-              <div
-                key={idx}
-                className="gradient-border glass p-4 rounded-2xl flex items-center gap-4 glass-hover group"
-              >
-                <div className="w-11 h-11 rounded-xl bg-gray-900 border border-gray-800 flex items-center justify-center text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
+              <div key={idx} className="card-croplyx p-4 flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: "#E8F5EE", color: "#16A34A" }}
+                >
                   {src.icon}
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-gray-100 group-hover:text-emerald-300 transition-colors">
-                    {src.name}
-                  </div>
-                  <div className="text-[11px] text-gray-500">{src.desc}</div>
+                  <div className="text-sm font-bold text-gray-900">{src.name}</div>
+                  <div className="text-xs text-gray-500">{src.desc}</div>
                 </div>
               </div>
             ))}
@@ -876,76 +731,23 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          9. TESTIMONIALS — Elegant farmer stories
+          9. FAQ — White section with accordion
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950/40 scroll-mt-20">
-        <div className="mx-auto max-w-5xl space-y-12">
-          <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
-              <Icons.Users className="w-3.5 h-3.5" />
-              <span>Community Impact</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-gray-100 tracking-tight">
-              Trusted by Farmers <span className="gradient-text">Across Pakistan</span>
-            </h2>
-            <p className="text-sm text-gray-400">
-              Real feedback from agricultural producers in Punjab and Sindh.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, idx) => (
-              <div
-                key={t.author}
-                className="gradient-border glass p-7 rounded-3xl flex flex-col justify-between space-y-5 glass-hover group relative overflow-hidden"
-              >
-                {/* Quote decoration */}
-                <div className="absolute -top-2 -right-2 text-7xl text-emerald-500/5 font-serif pointer-events-none select-none">
-                  &ldquo;
-                </div>
-                <p className="text-sm text-gray-300 italic leading-relaxed relative z-10">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3 pt-3 border-t border-gray-800/80">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 border border-emerald-600/40 flex items-center justify-center text-xs font-black text-white shrink-0 shadow-lg shadow-emerald-900/30">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-gray-100 group-hover:text-emerald-300 transition-colors">
-                      {t.author}
-                    </div>
-                    <div className="text-[11px] text-gray-500">
-                      {t.role} · {t.location}
-                    </div>
-                    <div className="text-[10px] text-emerald-500/60 font-medium">{t.crop}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          10. FAQ — Interactive accordion
-          ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20 bg-gray-950/60">
+      <section id="faq" className="section-white py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="mx-auto max-w-3xl space-y-10">
-          <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-800/60 text-xs text-emerald-300 font-bold backdrop-blur-sm">
+          <div className="text-center space-y-4">
+            <span className="section-label">
               <Icons.HelpCircle className="w-3.5 h-3.5" />
-              <span>FAQ</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-gray-100">
+              FAQ
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900">
               {lang === "sd"
-                ? "عام پڇيا ويندڙ سوال (FAQ)"
+                ? "عام پڇيا ويندڙ سوال"
                 : lang === "ur"
-                ? "اکثر پوچھے جانے والے سوالات (FAQ)"
+                ? "اکثر پوچھے جانے والے سوالات"
                 : "Frequently Asked Questions"}
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-500">
               {lang === "sd"
                 ? "ڪراپ ڊاڪٽر بابت تفصيلي ۽ آسان وضاحتون"
                 : lang === "ur"
@@ -962,25 +764,24 @@ export default function HomePage() {
               return (
                 <div
                   key={`faq-${index}`}
-                  className={`gradient-border glass rounded-2xl transition-all duration-300 overflow-hidden ${
-                    isOpen
-                      ? "border-emerald-700/70 bg-gray-950/90 shadow-lg shadow-emerald-950/30"
-                      : "border-gray-800 hover:border-gray-700 bg-gray-950/60"
-                  }`}
+                  className="card-croplyx transition-all duration-300 overflow-hidden"
+                  style={{ boxShadow: isOpen ? "0 4px 20px rgba(26,54,38,0.1)" : undefined, borderColor: isOpen ? "#BBF7D0" : undefined }}
                 >
                   <button
                     type="button"
                     onClick={() => setActiveFaq((prev) => (prev === index ? null : index))}
                     aria-expanded={isOpen}
-                    className="w-full p-5 sm:p-6 text-start flex items-center justify-between gap-4 font-bold text-sm text-gray-200 hover:text-emerald-300 cursor-pointer select-none transition-colors"
+                    className="w-full p-5 sm:p-6 text-start flex items-center justify-between gap-4 font-bold text-sm text-gray-900 hover:text-green-700 cursor-pointer select-none transition-colors"
                   >
                     <span className="leading-snug">{q}</span>
                     <div
-                      className={`w-8 h-8 rounded-xl border flex items-center justify-center shrink-0 transition-all duration-300 ease-out ${
-                        isOpen
-                          ? "rotate-180 bg-emerald-950/90 border-emerald-700/80 text-emerald-300"
-                          : "bg-gray-900 border-gray-800 text-gray-500"
-                      }`}
+                      className="w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300"
+                      style={{
+                        background: isOpen ? "#1a3626" : "#F4F1E8",
+                        borderColor: isOpen ? "#1a3626" : "#E5E1D8",
+                        color: isOpen ? "#fff" : "#6B7280",
+                        transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      }}
                     >
                       <Icons.ChevronDown className="w-4 h-4" />
                     </div>
@@ -992,7 +793,7 @@ export default function HomePage() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm text-gray-300 leading-relaxed border-t border-gray-800/60 pt-4">
+                      <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
                         {a}
                       </div>
                     </div>
@@ -1005,47 +806,87 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          11. FINAL CTA — Premium call-to-action banner
+          10. FINAL CTA — Croplyx-style dark banner
           ═══════════════════════════════════════════════════════════════════════ */}
-      <div className="section-divider" />
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-emerald-950/15 relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[120px]" />
-        </div>
-
-        <div className="mx-auto max-w-4xl gradient-border glass p-10 sm:p-14 rounded-3xl text-center space-y-7 shadow-2xl relative z-10">
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 bg-emerald-950/80 px-4 py-1.5 rounded-full border border-emerald-800 backdrop-blur-sm">
-            <Icons.Leaf className="w-3.5 h-3.5" />
-            <span>Protect Your Yield</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-gray-100 tracking-tight leading-tight">
-            Ready to Protect Your{" "}
-            <span className="gradient-text">Harvest</span>?
-          </h2>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
-            Diagnose leaf symptoms in seconds, view explainable Grad-CAM heatmaps, and track 7-day epidemiological
-            risks in your district — all free, all private, all in your language.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
-            <Link
-              href="/diagnose"
-              className="group inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm px-9 py-4 rounded-2xl shadow-xl shadow-emerald-950/60 transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer active:scale-[0.98]"
-            >
-              <Icons.Camera className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span>Launch Free Scanner</span>
-              <Icons.ArrowRight className="w-4 h-4 opacity-60 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/how-it-works"
-              className="inline-flex items-center justify-center gap-2 bg-gray-900 hover:bg-gray-800 border border-gray-700 text-gray-200 font-bold text-sm px-8 py-4 rounded-2xl transition-all hover:-translate-y-1 cursor-pointer"
-            >
-              <Icons.BookOpen className="w-4 h-4 text-emerald-400" />
-              <span>Learn More</span>
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: "#1a3626" }}>
+        <div className="mx-auto max-w-5xl">
+          <div
+            className="rounded-3xl px-8 py-10 sm:px-12 sm:py-12 flex flex-col sm:flex-row items-center justify-between gap-6"
+            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }}>
+                <Icons.Leaf className="w-5 h-5 text-green-400" />
+              </div>
+              <div>
+                <div className="font-bold text-white text-lg">Grow smarter, season after season</div>
+                <div className="text-sm text-white/50">Join thousands of farmers using CropDoctor AI to predict disease risk before it spreads.</div>
+              </div>
+            </div>
+            <Link href="/diagnose" className="btn-gold shrink-0">
+              Try a free prediction
+              <Icons.ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          FOOTER — Dark green footer (Croplyx style)
+          ═══════════════════════════════════════════════════════════════════════ */}
+      <footer className="px-4 sm:px-6 lg:px-8 pt-16 pb-10" style={{ background: "#152d20" }}>
+        <div className="mx-auto max-w-6xl">
+          {/* Top Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 pb-10 border-b border-white/10">
+            {/* Brand */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="flex items-center gap-2">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "#4a9a6b" }}>
+                  <Icons.Leaf className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="font-black text-white">CropDoctor AI</div>
+                  <div className="text-xs text-white/40">Smart Farming</div>
+                </div>
+              </div>
+              <p className="text-sm text-white/50 max-w-xs leading-relaxed">
+                Empowering farmers with AI-powered crop disease prediction, Grad-CAM explainability, and multilingual farming advice.
+              </p>
+            </div>
+
+            {/* Links */}
+            {[
+              { title: "PRODUCT", links: [{ l: "Disease Scanner", h: "/diagnose" }, { l: "AI Advisor", h: "/advisor" }, { l: "Risk Map", h: "/risk-map" }, { l: "How It Works", h: "/how-it-works" }] },
+              { title: "COMPANY", links: [{ l: "About Us", h: "/about" }, { l: "Safety Charter", h: "/safety" }, { l: "Technology", h: "/technology" }] },
+              { title: "SUPPORT", links: [{ l: "Expert Consultation", h: "/expert" }, { l: "Dashboard", h: "/dashboard" }] },
+            ].map((col) => (
+              <div key={col.title} className="space-y-4">
+                <div className="text-xs font-bold tracking-wider" style={{ color: "#4a9a6b" }}>{col.title}</div>
+                <ul className="space-y-2">
+                  {col.links.map((link) => (
+                    <li key={link.l}>
+                      <Link href={link.h} className="text-sm text-white/50 hover:text-white/90 transition-colors">
+                        {link.l}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Row */}
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-white/30">
+              © {new Date().getFullYear()} CropDoctor AI. MIT License.
+            </div>
+            <div className="flex items-center gap-2 text-xs font-semibold" style={{ color: "#4a9a6b" }}>
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              All systems healthy
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

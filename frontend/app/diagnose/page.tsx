@@ -136,7 +136,7 @@ function DiagnoseForm() {
   };
 
   const handleOpenCamera = () => {
-    if (typeof navigator !== "undefined" && navigator.mediaDevices?.getUserMedia) {
+    if (typeof navigator !== "undefined" && typeof navigator.mediaDevices?.getUserMedia === "function") {
       setIsCameraOpen(true);
     } else {
       cameraInputRef.current?.click();
@@ -226,12 +226,12 @@ function DiagnoseForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate dir={isRtl ? "rtl" : "ltr"}>
       {/* 1. Image Upload & Camera Card */}
-      <div className="glass p-5 sm:p-6 rounded-3xl border-gray-800 space-y-4 shadow-lg">
+      <div className="card-croplyx p-5 sm:p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-bold text-gray-200">
-            1. Crop Leaf Photo <span className="text-emerald-400">*</span>
+          <label className="block text-sm font-bold text-gray-800">
+            1. Crop Leaf Photo <span style={{ color: "#16A34A" }}>*</span>
           </label>
-          <span className="text-xs text-gray-500 font-medium">JPEG, PNG, WebP (Max 10MB)</span>
+          <span className="text-xs text-gray-400 font-medium">JPEG, PNG, WebP (Max 10MB)</span>
         </div>
 
         {/* Hidden File Input for Gallery */}
@@ -260,47 +260,53 @@ function DiagnoseForm() {
         />
 
         {!previewUrl ? (
-          <div className="border-2 border-dashed border-gray-700 hover:border-emerald-500/80 bg-gray-900/60 rounded-2xl p-6 sm:p-8 text-center transition-all space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-950/80 border border-emerald-800/60 flex items-center justify-center text-emerald-400 mx-auto">
+          <div
+            className="border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all space-y-4"
+            style={{ borderColor: "#D1CEC8", background: "#FAF8F4" }}
+          >
+            <div
+              className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto"
+              style={{ background: "#E8F5EE", color: "#16A34A" }}
+            >
               <Icons.Leaf className="w-6 h-6" />
             </div>
 
             <div className="space-y-1">
-              <p className="text-sm font-bold text-gray-200">
+              <p className="text-sm font-bold text-gray-800">
                 {t.photoInstruction}
               </p>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-500">
                 Ensure good lighting and capture the infected leaf area clearly.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 max-w-md mx-auto">
-              {/* Take Photo / Live Camera Button */}
               <button
                 type="button"
                 onClick={handleOpenCamera}
                 disabled={isAnalyzing}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:bg-emerald-700 text-white text-xs sm:text-sm font-bold px-5 py-3.5 rounded-xl shadow-lg shadow-emerald-950/50 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-bold px-5 py-3.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                style={{ background: "#1a3626", color: "#fff" }}
               >
                 <Icons.Camera className="w-4 h-4" />
                 <span>{t.takePhoto}</span>
               </button>
 
-              {/* Upload Gallery Button */}
               <button
                 type="button"
                 onClick={handleOpenGallery}
                 disabled={isAnalyzing}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 text-xs sm:text-sm font-semibold px-5 py-3.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-sm font-semibold px-5 py-3.5 rounded-xl transition-all cursor-pointer disabled:opacity-50"
+                style={{ background: "#F0EDE5", color: "#374151", border: "1px solid #D1CEC8" }}
               >
-                <Icons.Scan className="w-4 h-4 text-emerald-400" />
+                <Icons.Scan className="w-4 h-4" style={{ color: "#16A34A" }} />
                 <span>{t.uploadGallery}</span>
               </button>
             </div>
           </div>
         ) : (
-          <div className="relative rounded-2xl overflow-hidden border border-gray-700 bg-gray-900 shadow-md">
-            <div className="relative h-64 sm:h-80 w-full bg-black/50">
+          <div className="relative rounded-2xl overflow-hidden shadow-md" style={{ border: "1px solid #E5E1D8" }}>
+            <div className="relative h-64 sm:h-80 w-full" style={{ background: "#F4F1E8" }}>
               <Image
                 src={previewUrl}
                 alt="Selected leaf preview"
@@ -310,11 +316,11 @@ function DiagnoseForm() {
               />
             </div>
 
-            <div className="flex items-center justify-between p-3.5 bg-gray-950/95 border-t border-gray-800">
-              <div className="flex items-center gap-2 text-xs text-emerald-400 font-bold truncate max-w-[200px] sm:max-w-xs">
+            <div className="flex items-center justify-between p-3.5" style={{ background: "#F8F6F0", borderTop: "1px solid #E5E1D8" }}>
+              <div className="flex items-center gap-2 text-xs font-bold truncate max-w-[200px] sm:max-w-xs" style={{ color: "#16A34A" }}>
                 <span>✓ Photo ready</span>
                 {selectedFile && (
-                  <span className="text-gray-500 font-normal">
+                  <span className="text-gray-400 font-normal">
                     ({(selectedFile.size / (1024 * 1024)).toFixed(2)} MB)
                   </span>
                 )}
@@ -325,7 +331,8 @@ function DiagnoseForm() {
                   type="button"
                   onClick={handleOpenCamera}
                   disabled={isAnalyzing}
-                  className="text-xs bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold px-3 py-1.5 rounded-xl border border-gray-700 transition-colors cursor-pointer disabled:opacity-50"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                  style={{ background: "#F0EDE5", color: "#374151", border: "1px solid #D1CEC8" }}
                 >
                   {t.changePhoto}
                 </button>
@@ -333,7 +340,8 @@ function DiagnoseForm() {
                   type="button"
                   onClick={handleRemoveImage}
                   disabled={isAnalyzing}
-                  className="text-xs bg-red-950/80 hover:bg-red-900 text-red-300 font-semibold px-3 py-1.5 rounded-xl border border-red-800/60 transition-colors cursor-pointer disabled:opacity-50"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                  style={{ background: "#FEF2F2", color: "#DC2626", border: "1px solid #FECACA" }}
                 >
                   {t.removePhoto}
                 </button>
@@ -343,8 +351,8 @@ function DiagnoseForm() {
         )}
 
         {validationError && (
-          <div role="alert" className="p-3.5 rounded-2xl bg-red-950/70 border border-red-800/80 text-red-300 text-xs flex items-start gap-2 animate-fade-in-up">
-            <Icons.AlertTriangle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+          <div role="alert" className="p-3.5 rounded-xl text-xs flex items-start gap-2 animate-fade-in-up" style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#DC2626" }}>
+            <Icons.AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" style={{ color: "#DC2626" }} />
             <span>{validationError}</span>
           </div>
         )}
@@ -359,9 +367,9 @@ function DiagnoseForm() {
       />
 
       {/* 2. Crop Type Selection */}
-      <div className="glass p-5 sm:p-6 rounded-3xl border-gray-800 space-y-3 shadow-lg">
-        <label className="block text-sm font-bold text-gray-200">
-          2. {t.selectCrop} <span className="text-emerald-400">*</span>
+      <div className="card-croplyx p-5 sm:p-6 space-y-3">
+        <label className="block text-sm font-bold text-gray-800">
+          2. {t.selectCrop} <span style={{ color: "#16A34A" }}>*</span>
         </label>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {CROPS.map((crop) => (
@@ -371,20 +379,23 @@ function DiagnoseForm() {
               onClick={() => setSelectedCrop(crop.value)}
               disabled={isAnalyzing}
               className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between cursor-pointer ${
-                selectedCrop === crop.value
-                  ? "bg-emerald-950/80 border-emerald-500 text-emerald-300 ring-2 ring-emerald-500/40 shadow-md"
-                  : "bg-gray-900/70 border-gray-800 text-gray-400 hover:border-gray-700 hover:text-gray-200 hover:bg-gray-900"
-              } ${isAnalyzing ? "opacity-60 cursor-not-allowed" : ""}`}
+                isAnalyzing ? "opacity-60 cursor-not-allowed" : ""
+              }`}
+              style={{
+                background: selectedCrop === crop.value ? "#1a3626" : "#F4F1E8",
+                border: selectedCrop === crop.value ? "2px solid #4a9a6b" : "1px solid #E5E1D8",
+                color: selectedCrop === crop.value ? "#fff" : "#374151",
+              }}
             >
               <div className="flex items-center justify-between">
-                <Icons.Leaf className="w-6 h-6 text-emerald-400" />
+                <Icons.Leaf className="w-6 h-6" style={{ color: selectedCrop === crop.value ? "#86efac" : "#16A34A" }} />
                 {selectedCrop === crop.value && (
-                  <span className="text-xs text-emerald-400 font-extrabold">✓</span>
+                  <span className="text-xs font-extrabold" style={{ color: "#86efac" }}>✓</span>
                 )}
               </div>
               <div className="mt-2.5">
-                <div className="text-sm font-bold text-gray-100">{crop.label}</div>
-                <div className="text-xs text-gray-500 font-serif" dir="rtl">
+                <div className="text-sm font-bold">{crop.label}</div>
+                <div className="text-xs font-serif opacity-60" dir="rtl">
                   {selectedLanguage === "sd" ? crop.labelSd : crop.labelUr}
                 </div>
               </div>
@@ -394,10 +405,10 @@ function DiagnoseForm() {
       </div>
 
       {/* 3. Language & Optional District Selection */}
-      <div className="glass p-5 sm:p-6 rounded-3xl border-gray-800 space-y-4 shadow-lg">
+      <div className="card-croplyx p-5 sm:p-6 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="language-select" className="block text-xs font-bold text-gray-300 mb-1.5">
+            <label htmlFor="language-select" className="block text-xs font-bold text-gray-600 mb-1.5">
               3. {t.responseLang}
             </label>
             <select
@@ -405,7 +416,8 @@ function DiagnoseForm() {
               value={selectedLanguage}
               onChange={(e) => setSelectedLanguage(e.target.value as Language)}
               disabled={isAnalyzing}
-              className="w-full bg-gray-900 border border-gray-700 text-gray-200 text-sm font-medium rounded-xl px-3.5 py-2.5 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none disabled:opacity-50"
+              className="w-full text-sm font-medium rounded-xl px-3.5 py-2.5 outline-none disabled:opacity-50"
+              style={{ background: "#F4F1E8", border: "1px solid #D1CEC8", color: "#374151" }}
             >
               {LANGUAGES.map((lang) => (
                 <option key={lang.value} value={lang.value}>
@@ -416,7 +428,7 @@ function DiagnoseForm() {
           </div>
 
           <div>
-            <label htmlFor="district-select" className="block text-xs font-bold text-gray-300 mb-1.5">
+            <label htmlFor="district-select" className="block text-xs font-bold text-gray-600 mb-1.5">
               4. {t.selectDistrict}
             </label>
             <select
@@ -424,7 +436,8 @@ function DiagnoseForm() {
               value={selectedDistrict}
               onChange={(e) => setSelectedDistrict(e.target.value)}
               disabled={isAnalyzing}
-              className="w-full bg-gray-900 border border-gray-700 text-gray-200 text-sm font-medium rounded-xl px-3.5 py-2.5 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none disabled:opacity-50"
+              className="w-full text-sm font-medium rounded-xl px-3.5 py-2.5 outline-none disabled:opacity-50"
+              style={{ background: "#F4F1E8", border: "1px solid #D1CEC8", color: "#374151" }}
             >
               <option value="">-- Select District (Optional) --</option>
               {DEMO_DISTRICTS.map((district) => (
@@ -439,27 +452,28 @@ function DiagnoseForm() {
 
       {/* Error Callouts */}
       {is503Error && (
-        <div role="alert" className="p-4 rounded-2xl bg-amber-950/80 border border-amber-600/70 text-amber-200 text-sm space-y-2 animate-fade-in-up">
-          <div className="flex items-center gap-2 font-bold text-amber-300">
+        <div role="alert" className="p-4 rounded-xl text-sm space-y-2 animate-fade-in-up" style={{ background: "#FFFBEB", border: "1px solid #FCD34D", color: "#92400E" }}>
+          <div className="flex items-center gap-2 font-bold">
             <Icons.AlertTriangle className="w-4 h-4" />
             <span>AI Service Unavailable</span>
           </div>
-          <p className="text-xs leading-relaxed text-amber-200/90">{apiError}</p>
+          <p className="text-xs leading-relaxed opacity-80">{apiError}</p>
         </div>
       )}
 
       {apiError && !is503Error && (
-        <div role="alert" className="p-4 rounded-2xl bg-red-950/80 border border-red-700 text-red-200 text-sm space-y-1 animate-fade-in-up flex items-center justify-between gap-3">
+        <div role="alert" className="p-4 rounded-xl text-sm space-y-1 animate-fade-in-up flex items-center justify-between gap-3" style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#DC2626" }}>
           <div className="space-y-0.5">
-            <div className="flex items-center gap-2 font-bold text-red-300 text-xs">
-              <Icons.AlertTriangle className="w-4 h-4 text-red-400" />
+            <div className="flex items-center gap-2 font-bold text-xs">
+              <Icons.AlertTriangle className="w-4 h-4" />
               <span>Analysis Error</span>
             </div>
-            <p className="text-xs text-red-200/90">{apiError}</p>
+            <p className="text-xs opacity-80">{apiError}</p>
           </div>
           <button
             type="submit"
-            className="px-3 py-1.5 rounded-xl bg-red-900 hover:bg-red-800 text-white text-xs font-bold cursor-pointer transition-colors shrink-0"
+            className="px-3 py-1.5 rounded-xl text-white text-xs font-bold cursor-pointer transition-colors shrink-0"
+            style={{ background: "#DC2626" }}
           >
             Try Again
           </button>
@@ -471,11 +485,13 @@ function DiagnoseForm() {
         <button
           type="submit"
           disabled={!selectedFile}
-          className={`w-full py-4 px-6 rounded-2xl text-base font-bold transition-all shadow-xl flex items-center justify-center gap-2 ${
-            selectedFile
-              ? "bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white shadow-emerald-950/60 cursor-pointer hover:-translate-y-0.5"
-              : "bg-gray-800 text-gray-500 border border-gray-700/50 cursor-not-allowed"
+          className={`w-full py-4 px-6 rounded-2xl text-base font-bold transition-all flex items-center justify-center gap-2 ${
+            selectedFile ? "cursor-pointer" : "cursor-not-allowed opacity-60"
           }`}
+          style={{
+            background: selectedFile ? "#1a3626" : "#E5E1D8",
+            color: selectedFile ? "#fff" : "#9CA3AF",
+          }}
         >
           <Icons.Scan className="w-5 h-5" />
           <span>{t.scanCrop}</span>
@@ -484,18 +500,18 @@ function DiagnoseForm() {
         <div
           aria-live="polite"
           aria-atomic="true"
-          className="glass p-6 sm:p-8 rounded-3xl border-emerald-700/60 text-center space-y-4 animate-fade-in-up shadow-xl"
+          className="card-croplyx p-6 sm:p-8 text-center space-y-4 animate-fade-in-up"
         >
-          <div className="inline-block animate-spin text-emerald-400">
+          <div className="inline-block animate-spin" style={{ color: "#16A34A" }}>
             <Icons.RefreshCw className="w-8 h-8" />
           </div>
-          <div className="text-base font-bold text-emerald-300">
+          <div className="text-base font-bold" style={{ color: "#1a3626" }}>
             {currentStages[loadingStageIndex]}
           </div>
-          <div className="w-full bg-gray-800 h-2.5 rounded-full overflow-hidden border border-gray-700 p-0.5 max-w-md mx-auto">
-            <div className="bg-emerald-500 h-full animate-pulse w-3/4 rounded-full transition-all duration-500" />
+          <div className="w-full h-2.5 rounded-full overflow-hidden max-w-md mx-auto" style={{ background: "#E8E4DA" }}>
+            <div className="h-full animate-pulse rounded-full transition-all duration-500" style={{ width: "75%", background: "linear-gradient(90deg, #16A34A, #E9A800)" }} />
           </div>
-          <p className="text-xs text-gray-400">{t.keepBrowserOpen}</p>
+          <p className="text-xs text-gray-500">{t.keepBrowserOpen}</p>
         </div>
       )}
     </form>
@@ -504,32 +520,54 @@ function DiagnoseForm() {
 
 export default function DiagnosePage() {
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 sm:py-10 space-y-6">
-      <div className="text-center sm:text-left space-y-1">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/40 text-xs text-emerald-400 font-bold mb-1">
-          <Icons.Scan className="w-3.5 h-3.5" />
-          <span>AI Crop Scanner · Cotton · Wheat · Rice · Sugarcane</span>
+    <div style={{ background: "#F0EDE5", minHeight: "100vh" }}>
+      {/* Page Header — Croplyx style cream with dark heading */}
+      <div style={{ background: "#1a3626" }} className="px-4 sm:px-6 lg:px-8 pt-12 pb-16">
+        <div className="mx-auto max-w-2xl text-center space-y-4">
+          <span className="section-label-dark">
+            <Icons.Scan className="w-3.5 h-3.5" />
+            AI Crop Scanner · Cotton · Wheat · Rice · Sugarcane
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Get Your Disease Risk Report
+          </h1>
+          <p className="text-sm text-white/60 max-w-md mx-auto">
+            Upload a crop leaf photo to get automated diagnosis, OpenCV severity measurement, and Grad-CAM explanation.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 pt-2 text-sm text-white/50">
+            <div className="flex items-center gap-2">
+              <Icons.ShieldCheck className="w-4 h-4 text-green-400" />
+              Disease risk assessment
+            </div>
+            <div className="flex items-center gap-2">
+              <Icons.Activity className="w-4 h-4 text-green-400" />
+              Quick analysis results
+            </div>
+            <div className="flex items-center gap-2">
+              <Icons.Sparkles className="w-4 h-4 text-green-400" />
+              Grad-CAM explanation
+            </div>
+          </div>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-100 tracking-tight">
-          Crop Disease Scanner
-        </h1>
-        <p className="text-xs sm:text-sm text-gray-400">
-          Capture or upload an infected crop leaf to obtain automated diagnosis, OpenCV severity measurement, and Grad-CAM explanation.
-        </p>
       </div>
 
-      <Suspense
-        fallback={
-          <div className="glass p-8 text-center text-gray-400 rounded-3xl">
-            <div className="animate-spin text-emerald-400 flex justify-center mb-2">
-              <Icons.RefreshCw className="w-8 h-8" />
-            </div>
-            Loading scanner...
-          </div>
-        }
-      >
-        <DiagnoseForm />
-      </Suspense>
+      {/* Form Card — Elevated white card on cream */}
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 -mt-8 pb-16">
+        <div className="card-croplyx p-6 sm:p-8 space-y-6">
+          <Suspense
+            fallback={
+              <div className="p-8 text-center text-gray-400">
+                <div className="animate-spin text-green-600 flex justify-center mb-3">
+                  <Icons.RefreshCw className="w-8 h-8" />
+                </div>
+                Loading scanner...
+              </div>
+            }
+          >
+            <DiagnoseForm />
+          </Suspense>
+        </div>
+      </div>
     </div>
   );
 }
