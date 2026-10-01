@@ -1,4 +1,4 @@
-# AgriGuard AI — Deployment Status & Production Guide
+# CropDoctor Ai — Deployment Status & Production Guide
 
 ## Executive Status
 

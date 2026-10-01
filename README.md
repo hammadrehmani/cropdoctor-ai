@@ -38,8 +38,8 @@ Real-Time Deep Learning Vision · Grad-CAM Visual Explainability · Automated Op
 ### 1. Repository Setup
 
 ```bash
-git clone https://github.com/hammadrehmani/agriguard-ai
-cd agriguard-ai
+git clone https://github.com/hammadrehmani/cropdoctor-ai
+cd cropdoctor-ai
 ```
 
 ### 2. Backend Setup

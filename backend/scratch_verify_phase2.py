@@ -54,7 +54,7 @@ def make_test_png() -> bytes:
 
 async def run_verification():
     print("=" * 70)
-    print("AGRIGUARD AI — PHASE 2 SYSTEM VERIFICATION")
+    print("CROPDOCTOR AI — PHASE 2 SYSTEM VERIFICATION")
     print("=" * 70)
 
     # Initialize lifespan services (normally done by uvicorn startup)

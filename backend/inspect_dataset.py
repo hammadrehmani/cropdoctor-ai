@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 from PIL import Image
 
-DATASET_ROOT = Path("D:/agriguard-ai/data/raw/plant_disease")
+DATASET_ROOT = Path("D:/cropdoctor-ai/data/raw/plant_disease")
 
 def inspect():
     print("=" * 70)

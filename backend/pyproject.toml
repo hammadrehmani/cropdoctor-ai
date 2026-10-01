@@ -3,9 +3,9 @@ requires = ["setuptools>=70.0"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
-name = "agriguard-ai-backend"
+name = "cropdoctor-ai-backend"
 version = "0.1.0"
-description = "AgriGuard AI — FastAPI backend service"
+description = "CropDoctor Ai — FastAPI backend service"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
