@@ -30,10 +30,15 @@ backend/ml/models/*.pt
 backend/ml/models/*.pth
 backend/ml/models/*.pkl
 backend/ml/models/*.joblib
+!backend/ml/models/classifier.pt
+!backend/ml/models/risk_model.joblib
 backend/ml/data/
-backend/ml/faiss/
+backend/ml/faiss/*.index
+backend/ml/faiss/*.pkl
+!backend/ml/faiss/cropdoctor.index
+!backend/ml/faiss/cropdoctor_docs.pkl
+!backend/ml/faiss/cropdoctor_docs.json
 data/raw/
-*.index
 
 # ─── Secrets / Environment ────────────────────────────────────────────────────
 .env
