@@ -56,7 +56,10 @@ async def answer(
         )
 
     # 2. Embed user query using multilingual sentence transformer
-    query_vec = await embedder.embed(message)
+    search_text = message
+    if diagnosis_context and diagnosis_context.disease and diagnosis_context.disease.lower() not in message.lower():
+        search_text = f"{diagnosis_context.disease} on {diagnosis_context.crop or crop or 'wheat'}: {message}"
+    query_vec = await embedder.embed(search_text)
 
     # 3. Retrieve relevant verified knowledge base chunks from FAISS
     retrieval_res = await retriever.retrieve(

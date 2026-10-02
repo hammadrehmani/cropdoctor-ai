@@ -13,18 +13,19 @@ interface NavItem {
 }
 
 const PRIMARY_LINKS: NavItem[] = [
-  { href: "/",             label: "Home",         icon: Icons.Home },
-  { href: "/diagnose",     label: "Disease Prediction", icon: Icons.Scan, badge: "POPULAR" },
-  { href: "/advisor",      label: "AI Advisor",   icon: Icons.Message, badge: "AI" },
+  { href: "/",             label: "Home",               icon: Icons.Home },
+  { href: "/diagnose",     label: "Disease Prediction", icon: Icons.Scan },
+  { href: "/advisor",      label: "AI Advisor",         icon: Icons.Message },
+  { href: "/risk-map",     label: "Risk Map",           icon: Icons.Map },
+  { href: "/dashboard",    label: "Dashboard",          icon: Icons.Dashboard },
 ];
 
 const MORE_LINKS: NavItem[] = [
-  { href: "/#what-we-do",      label: "What We Do",      icon: Icons.Sparkles },
-  { href: "/risk-map",         label: "Risk Map",        icon: Icons.Map },
-  { href: "/dashboard",        label: "Dashboard",       icon: Icons.Dashboard },
-  { href: "/crops",            label: "Supported Crops", icon: Icons.Leaf },
-  { href: "/#our-story",       label: "About",           icon: Icons.BookOpen },
-  { href: "/#faq",             label: "FAQ",             icon: Icons.HelpCircle },
+  { href: "/#what-we-do",      label: "What We Do",           icon: Icons.Sparkles },
+  { href: "/crops",            label: "Supported Crops",      icon: Icons.Leaf },
+  { href: "/expert",           label: "Expert Consultation",  icon: Icons.PhoneCall },
+  { href: "/#our-story",       label: "About",                icon: Icons.BookOpen },
+  { href: "/#faq",             label: "FAQ",                  icon: Icons.HelpCircle },
 ];
 
 export function Navbar() {
@@ -168,14 +169,8 @@ export function Navbar() {
             </div>
           </nav>
 
-          {/* Right — Contact + CTA */}
+          {/* Right — CTA */}
           <div className="hidden md:flex items-center gap-3 shrink-0">
-            <span
-              className="text-sm font-medium text-gray-500 hidden xl:block cursor-default"
-              style={{ color: "#6B7280" }}
-            >
-              Contact
-            </span>
             <Link
               href="/diagnose"
               className="inline-flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full whitespace-nowrap shrink-0 transition-all"

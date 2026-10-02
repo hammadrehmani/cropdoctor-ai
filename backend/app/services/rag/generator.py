@@ -211,10 +211,11 @@ async def generate_answer(
         )
         messages.append({"role": "user", "content": current_content})
 
+        req_max_tokens = 350 if use_groq else 512
         response = await client.chat.completions.create(
             model=model,
             messages=messages,
-            max_tokens=512,
+            max_tokens=req_max_tokens,
             temperature=0.2,
         )
         assistant_reply = response.choices[0].message.content or ""

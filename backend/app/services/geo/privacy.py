@@ -30,6 +30,15 @@ def load_districts() -> None:
     global _districts
     path = Path(settings.districts_json_path)
     if not path.exists():
+        for candidate in [
+            Path("data/districts.json"),
+            Path("../data/districts.json"),
+            Path(__file__).resolve().parent.parent.parent.parent / "data" / "districts.json",
+        ]:
+            if candidate.exists():
+                path = candidate
+                break
+    if not path.exists():
         logger.warning(f"Districts file not found at {path} — privacy layer unavailable.")
         return
     with open(path, encoding="utf-8") as f:

@@ -15,7 +15,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=[
+            str(Path(__file__).resolve().parents[1] / ".env"),
+            ".env",
+        ],
         env_file_encoding="utf-8",
         case_sensitive=False,
         extra="ignore",
@@ -65,10 +68,10 @@ class Settings(BaseSettings):
     severity_threshold_severe: float = 50.0
 
     # ── Feature Flags ──────────────────────────────────────────────────────
-    mock_ml_models: bool = True
+    mock_ml_models: bool = False
     """Global mock flag (Phase 1 compat). Use diagnosis_mock_mode for Phase 2."""
 
-    diagnosis_mock_mode: bool = True
+    diagnosis_mock_mode: bool = False
     """
     Phase 2 mock flag for the /analyze endpoint.
     true  → deterministic mock predictions (clearly labelled is_mock=True)

@@ -147,6 +147,18 @@ function DiagnoseForm() {
     galleryInputRef.current?.click();
   };
 
+  const handleSelectSample = async (samplePath: string, filename: string, crop: CropType) => {
+    try {
+      setSelectedCrop(crop);
+      const res = await fetch(samplePath);
+      const blob = await res.blob();
+      const file = new File([blob], filename, { type: "image/jpeg" });
+      validateAndSetFile(file);
+    } catch (err) {
+      console.error("Failed to load sample image:", err);
+    }
+  };
+
   const handleRemoveImage = () => {
     setSelectedFile(null);
     setPreviewUrl(null);
@@ -349,6 +361,40 @@ function DiagnoseForm() {
             </div>
           </div>
         )}
+
+        {/* Quick Sample Selector for Live Demos */}
+        <div className="pt-2 border-t border-gray-100 space-y-2">
+          <div className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
+            <Icons.Sparkles className="w-3.5 h-3.5 text-[#16A34A]" />
+            <span>Try Sample Verified Leaves (Instant Hackathon Demo):</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => handleSelectSample("/samples/wheat_rust.jpg", "wheat_rust.jpg", "wheat")}
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-900 hover:bg-amber-100 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>🍂</span>
+              <span>Wheat Leaf Rust (95%)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectSample("/samples/wheat_powdery.jpg", "wheat_powdery.jpg", "wheat")}
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-purple-200 bg-purple-50 text-purple-900 hover:bg-purple-100 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>⚪</span>
+              <span>Powdery Mildew (93%)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleSelectSample("/samples/wheat_healthy.jpg", "wheat_healthy.jpg", "wheat")}
+              className="text-xs font-semibold px-3 py-1.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-900 hover:bg-emerald-100 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>🍃</span>
+              <span>Healthy Wheat Leaf</span>
+            </button>
+          </div>
+        </div>
 
         {validationError && (
           <div role="alert" className="p-3.5 rounded-xl text-xs flex items-start gap-2 animate-fade-in-up" style={{ background: "#FEF2F2", border: "1px solid #FECACA", color: "#DC2626" }}>

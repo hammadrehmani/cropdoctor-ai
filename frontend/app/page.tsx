@@ -125,7 +125,9 @@ export default function HomePage() {
         <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(74,154,107,0.15) 0%, transparent 70%)", filter: "blur(60px)" }} />
         <div className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(233,168,0,0.08) 0%, transparent 70%)", filter: "blur(80px)" }} />
 
-        <div className="mx-auto max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center py-24 lg:py-32 relative z-10">
+        <div className="mx-auto max-w-7xl w-full flex flex-col justify-between pt-14 pb-8 lg:pt-24 lg:pb-10 relative z-10 gap-10 lg:gap-14">
+          {/* Top Row: Hero Content & Floating Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* Left: Text Content */}
           <div className="space-y-8 animate-reveal">
@@ -258,7 +260,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Status Badge */}
-            <div className="absolute -top-4 -left-4 hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold text-gray-800">
+            <div className="absolute -top-4 -left-4 animate-float hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold text-gray-800">
               <span className="text-lg">🌿</span>
               <div>
                 <div className="text-xs text-gray-400">Status</div>
@@ -267,7 +269,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Price Alert Badge */}
-            <div className="absolute -bottom-4 -right-4 hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold" style={{ color: "#1a3626" }}>
+            <div className="absolute -bottom-4 -right-4 animate-float hero-card px-4 py-2.5 flex items-center gap-2 text-sm font-bold" style={{ color: "#1a3626", animationDelay: "3s" }}>
               <div className="w-7 h-7 rounded-xl flex items-center justify-center" style={{ background: "#1a3626" }}>
                 <Icons.Activity className="w-4 h-4 text-white" />
               </div>
@@ -277,29 +279,43 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
+          {/* End Top Row Grid */}
+          </div>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
-          TRUST MARQUEE — Horizontal scrolling tech stack
-          ═══════════════════════════════════════════════════════════════════════ */}
-      <div style={{ background: "#F0EDE5", borderTop: "1px solid #E5E1D8", borderBottom: "1px solid #E5E1D8" }}>
-        <div className="py-4 overflow-hidden relative">
-          <div className="flex animate-ticker">
-            {[...TRUST_ITEMS, ...TRUST_ITEMS].map((item, idx) => (
+          <div className="w-full max-w-7xl mx-auto pt-8 pb-10 relative z-10 animate-reveal animate-reveal-d3">
+            <div className="relative overflow-hidden py-4">
+              {/* Left & Right Smooth Gradient Fades matching hero background */}
               <div
-                key={idx}
-                className="flex items-center gap-2.5 px-8 py-1.5 whitespace-nowrap shrink-0"
-                style={{ color: "#6B7280", fontSize: "13px", fontWeight: 600 }}
-              >
-                <span className="text-base">{item.icon}</span>
-                <span>{item.label}</span>
-                <span className="mx-4" style={{ color: "#D1CEC8" }}>·</span>
+                className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 sm:w-40 z-10"
+                style={{ background: "linear-gradient(to right, rgb(26, 54, 38) 0%, transparent 100%)" }}
+              />
+              <div
+                className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 sm:w-40 z-10"
+                style={{ background: "linear-gradient(to left, rgb(26, 54, 38) 0%, transparent 100%)" }}
+              />
+
+              {/* Marquee Track with Pills */}
+              <div className="flex items-center animate-ticker select-none">
+                {[...TRUST_ITEMS, ...TRUST_ITEMS, ...TRUST_ITEMS, ...TRUST_ITEMS].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center px-5 py-2 mx-2 rounded-full whitespace-nowrap shrink-0 transition-transform duration-300 hover:scale-105"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.03)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      color: "#ffffff",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    <span className="text-white/80">{item.label}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
           2. METRICS — Light cream section with stat cards
@@ -541,9 +557,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 relative pt-5">
             {/* Connecting line */}
-            <div className="hidden lg:block absolute top-10 left-[12%] right-[12%] h-px" style={{ background: "linear-gradient(90deg, transparent, #D1FAE5, transparent)" }} />
+            <div className="hidden lg:block absolute top-14 left-[12%] right-[12%] h-px" style={{ background: "linear-gradient(90deg, transparent, #D1FAE5, transparent)" }} />
 
             {[
               { step: "01", icon: <Icons.Camera className="w-5 h-5" />, title: "Snap Leaf Photo", desc: "Capture a close-up of the affected leaf via mobile camera or upload from gallery." },
@@ -551,11 +567,16 @@ export default function HomePage() {
               { step: "03", icon: <Icons.Sparkles className="w-5 h-5" />, title: "Inspect Grad-CAM", desc: "Verify the visual heatmap proving the model focused on real symptoms, not artifacts." },
               { step: "04", icon: <Icons.Message className="w-5 h-5" />, title: "Take Action & Ask AI", desc: "Check 7-day outbreak forecasts and get grounded management advice in Urdu or Sindhi." },
             ].map((s, idx) => (
-              <div key={idx} className="card-croplyx p-6 space-y-4 relative">
-                <div className="absolute -top-3 left-5 w-7 h-7 rounded-full text-white text-xs font-black flex items-center justify-center shadow" style={{ background: "#1a3626" }}>
+              <div key={idx} className="card-croplyx !overflow-visible p-6 pt-7 space-y-4 relative">
+                <div
+                  className="absolute -top-4 left-5 w-8 h-8 rounded-full text-white text-xs font-black flex items-center justify-center z-10"
+                  style={{
+                    background: "#1a3626",
+                  }}
+                >
                   {idx + 1}
                 </div>
-                <div className="text-[10px] font-black tracking-widest pt-3" style={{ color: "#4a9a6b" }}>
+                <div className="text-[10px] font-black tracking-widest pt-1" style={{ color: "#4a9a6b" }}>
                   STEP {s.step}
                 </div>
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "#E8F5EE", color: "#16A34A" }}>

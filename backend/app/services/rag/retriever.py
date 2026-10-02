@@ -54,6 +54,18 @@ def load_index() -> None:
         docs_path = Path(settings.faiss_docs_path)
 
         if not idx_path.exists() or not docs_path.exists():
+            backend_root = Path(__file__).resolve().parents[3]
+            candidates = [
+                (backend_root / idx_path, backend_root / docs_path),
+                (backend_root / "ml" / "faiss" / "cropdoctor.index", backend_root / "ml" / "faiss" / "cropdoctor_docs.pkl"),
+                (Path.cwd() / "backend" / "ml" / "faiss" / "cropdoctor.index", Path.cwd() / "backend" / "ml" / "faiss" / "cropdoctor_docs.pkl"),
+            ]
+            for c_idx, c_docs in candidates:
+                if c_idx.exists() and c_docs.exists():
+                    idx_path, docs_path = c_idx, c_docs
+                    break
+
+        if not idx_path.exists() or not docs_path.exists():
             logger.warning(
                 f"FAISS index files not found ({idx_path}, {docs_path}). "
                 "Run ml/scripts/build_rag_index.py to build them."
@@ -82,6 +94,23 @@ def get_index_and_docs() -> tuple[Any, list[dict]]:
 
 _MOCK_CHUNKS = [
     RetrievedChunk(
+        chunk_id="wheat_en_powdery",
+        crop="wheat",
+        disease="Powdery Mildew — Blumeria graminis f. sp. tritici",
+        language="en",
+        source="FAO & Pakistan Directorate of Agricultural Information",
+        source_title="Wheat Disease Management Guide",
+        text=(
+            "## Powdery Mildew — Blumeria graminis f. sp. tritici\n"
+            "- Crop: Wheat\n"
+            "- Symptoms: White to light-grey powdery fungal patches on upper leaf surfaces, stems, and leaf sheaths.\n"
+            "- Favourable Conditions: Dense crop canopies, high humidity (85–100%), and moderate temperatures (15–20°C) with low sunlight.\n"
+            "- Prevention & Cultural Control: Avoid excessive nitrogen fertilization; maintain balanced N-P-K nutrition and optimal seed rate to prevent dense foliage.\n"
+            "- Management: Implement preventive canopy aeration. If upper leaves are colonized, consult local extension officers for approved systemic foliar treatments (such as registered triazole or strobilurin fungicides)."
+        ),
+        score=0.85,
+    ),
+    RetrievedChunk(
         chunk_id="wheat_en_0",
         crop="wheat",
         disease="Leaf Rust (Brown Rust)",
@@ -91,6 +120,19 @@ _MOCK_CHUNKS = [
         text=(
             "Leaf Rust (Puccinia triticina) is widespread in Pakistan. Small orange-brown "
             "pustules on leaves. Management: use resistant varieties and early planting."
+        ),
+        score=0.75,
+    ),
+    RetrievedChunk(
+        chunk_id="wheat_en_yellow_rust",
+        crop="wheat",
+        disease="Yellow Rust (Stripe Rust) — Puccinia striiformis",
+        language="en",
+        source="FAO & Pakistan Directorate of Agricultural Information",
+        source_title="Wheat Disease Management Guide",
+        text=(
+            "Yellow Rust (Puccinia striiformis) exhibits yellow-orange pustules arranged in stripes parallel to leaf veins. "
+            "Management: Plant resistant cultivars, scout in cool weather, and use recommended protective fungicides."
         ),
         score=0.75,
     ),
